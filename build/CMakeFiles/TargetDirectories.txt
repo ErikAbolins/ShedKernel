@@ -1,0 +1,3 @@
+/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir
+/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/rebuild_cache.dir

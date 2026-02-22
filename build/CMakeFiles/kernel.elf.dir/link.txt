@@ -1,0 +1,1 @@
+i686-linux-gnu-gcc -nostdlib -e _start -T /mnt/c/Users/Erik/Documents/OSAttempt/linker.ld -Wl,--dependency-file=CMakeFiles/kernel.elf.dir/link.d CMakeFiles/kernel.elf.dir/boot.asm.o CMakeFiles/kernel.elf.dir/kernel.c.o CMakeFiles/kernel.elf.dir/kbd_driver.c.o CMakeFiles/kernel.elf.dir/mm.c.o -o kernel.elf
