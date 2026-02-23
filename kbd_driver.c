@@ -1,5 +1,6 @@
 #include "kbd_driver.h"
 #include "keyboard_map.h"
+#include "mm.h"
 
 
 
@@ -84,8 +85,15 @@ void kbd_handler_main(void) {
 	if (keycode == BACKSPACE_KEY_CODE) {
 		if(current_loc >= 2) {
 		current_loc -= 2;
-		vidptr[current_loc] = ' ';
+        vidptr[current_loc] = ' ';
 		vidptr[current_loc + 1] = 0x07;
+
+		unsigned short cursor_pos = current_loc / 2;
+		write_port(0x3D4, 0x0F);
+		write_port(0x3D5, (unsigned char)(cursor_pos & 0xFF));
+		write_port(0x3D4, 0x0E);
+		write_port(0x3D5, (unsigned char)((cursor_pos >> 8) & 0xFF));
+
 		}
 		return;
     }

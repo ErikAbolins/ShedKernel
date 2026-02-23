@@ -12,9 +12,11 @@ global kbd_handler
 global read_port
 global write_port
 global load_idt
+global timer_handler
 
 extern kernel_main
 extern kbd_handler_main
+extern timer_callback
 
 read_port:
     mov edx, [esp + 4]
@@ -36,6 +38,12 @@ load_idt:
 kbd_handler:
     pusha
     call kbd_handler_main
+    popa
+    iretd
+
+timer_handler:
+    pusha
+    call timer_callback
     popa
     iretd
 

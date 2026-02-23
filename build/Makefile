@@ -209,6 +209,30 @@ mm.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/mm.c.s
 .PHONY : mm.c.s
 
+time.o: time.c.o
+.PHONY : time.o
+
+# target to build an object file
+time.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/time.c.o
+.PHONY : time.c.o
+
+time.i: time.c.i
+.PHONY : time.i
+
+# target to preprocess a source file
+time.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/time.c.i
+.PHONY : time.c.i
+
+time.s: time.c.s
+.PHONY : time.s
+
+# target to generate assembly for a file
+time.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/time.c.s
+.PHONY : time.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -228,6 +252,9 @@ help:
 	@echo "... mm.o"
 	@echo "... mm.i"
 	@echo "... mm.s"
+	@echo "... time.o"
+	@echo "... time.i"
+	@echo "... time.s"
 .PHONY : help
 
 

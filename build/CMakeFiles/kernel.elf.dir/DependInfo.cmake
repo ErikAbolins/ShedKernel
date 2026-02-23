@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.c" "CMakeFiles/kernel.elf.dir/kbd_driver.c.o" "gcc" "CMakeFiles/kernel.elf.dir/kbd_driver.c.o.d"
   "/mnt/c/Users/Erik/Documents/OSAttempt/kernel.c" "CMakeFiles/kernel.elf.dir/kernel.c.o" "gcc" "CMakeFiles/kernel.elf.dir/kernel.c.o.d"
   "/mnt/c/Users/Erik/Documents/OSAttempt/mm.c" "CMakeFiles/kernel.elf.dir/mm.c.o" "gcc" "CMakeFiles/kernel.elf.dir/mm.c.o.d"
+  "/mnt/c/Users/Erik/Documents/OSAttempt/time.c" "CMakeFiles/kernel.elf.dir/time.c.o" "gcc" "CMakeFiles/kernel.elf.dir/time.c.o.d"
   "" "kernel.elf" "gcc" "CMakeFiles/kernel.elf.dir/link.d"
   )
 

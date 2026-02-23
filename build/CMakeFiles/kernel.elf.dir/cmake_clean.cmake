@@ -8,6 +8,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/kernel.elf.dir/kernel.c.o.d"
   "CMakeFiles/kernel.elf.dir/mm.c.o"
   "CMakeFiles/kernel.elf.dir/mm.c.o.d"
+  "CMakeFiles/kernel.elf.dir/time.c.o"
+  "CMakeFiles/kernel.elf.dir/time.c.o.d"
   "kernel.elf"
   "kernel.elf.pdb"
 )

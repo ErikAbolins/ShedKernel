@@ -3,40 +3,52 @@
 
 CMakeFiles/kernel.elf.dir/kbd_driver.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.c \
   /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h \
-  /mnt/c/Users/Erik/Documents/OSAttempt/keyboard_map.h
+  /mnt/c/Users/Erik/Documents/OSAttempt/keyboard_map.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/mm.h
 
 CMakeFiles/kernel.elf.dir/kernel.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kernel.c \
   /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h \
-  /mnt/c/Users/Erik/Documents/OSAttempt/mm.h
+  /mnt/c/Users/Erik/Documents/OSAttempt/mm.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/time.h
 
 CMakeFiles/kernel.elf.dir/mm.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/mm.c \
   /mnt/c/Users/Erik/Documents/OSAttempt/mm.h
+
+CMakeFiles/kernel.elf.dir/time.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/time.c \
+  /mnt/c/Users/Erik/Documents/OSAttempt/time.h
 
 kernel.elf: /mnt/c/Users/Erik/Documents/OSAttempt/linker.ld \
   CMakeFiles/kernel.elf.dir/boot.asm.o \
   CMakeFiles/kernel.elf.dir/kbd_driver.c.o \
   CMakeFiles/kernel.elf.dir/kernel.c.o \
-  CMakeFiles/kernel.elf.dir/mm.c.o
+  CMakeFiles/kernel.elf.dir/mm.c.o \
+  CMakeFiles/kernel.elf.dir/time.c.o
 
 
-CMakeFiles/kernel.elf.dir/mm.c.o:
+CMakeFiles/kernel.elf.dir/time.c.o:
 
-CMakeFiles/kernel.elf.dir/kernel.c.o:
-
-CMakeFiles/kernel.elf.dir/kbd_driver.c.o:
-
-CMakeFiles/kernel.elf.dir/boot.asm.o:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/linker.ld:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/kernel.c:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/keyboard_map.h:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/mm.h:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h:
+/mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.c:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/mm.c:
 
-/mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.c:
+/mnt/c/Users/Erik/Documents/OSAttempt/mm.h:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/keyboard_map.h:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/time.c:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/time.h:
+
+CMakeFiles/kernel.elf.dir/boot.asm.o:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/kernel.c:
+
+CMakeFiles/kernel.elf.dir/kbd_driver.c.o:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/linker.ld:
+
+CMakeFiles/kernel.elf.dir/kernel.c.o:
+
+CMakeFiles/kernel.elf.dir/mm.c.o:

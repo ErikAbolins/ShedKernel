@@ -1,5 +1,6 @@
 #include "kbd_driver.h"
 #include "mm.h"
+#include "time.h"
 
 #define LINES 25
 #define COLUMNS_IN_LINE 80
@@ -13,6 +14,10 @@
 #define KERNEL_CODE_SEGMENT_OFFSET 0x08
 #define GDTBASE 0x00000800
 
+
+#define PIT_FREQ 1193180
+#define HZ 100
+
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
@@ -22,6 +27,8 @@ extern char read_port(unsigned short port);
 extern void write_port(unsigned short port, unsigned char data);
 extern void load_idt(unsigned long *idt_ptr);
 extern void kbd_handler(void);
+extern void timer_handler(void);
+volatile uint32_t jiffies = 0;
 unsigned int current_loc = 0;
 char *vidptr = (char*)0xb8000;
 
@@ -116,9 +123,9 @@ void gdt_init(void)
 
     memcpy((void*)GDTBASE, (void*)kgdt, sizeof(kgdt));
 
-    asm volatile("lgdt (kgdtr)");
+    asm volatile("lgdt %0" : : "m"(kgdtr));
 
-    asm volatile( //declare the gdt table because i'm too lazy to write in the bootloader
+    asm volatile( //declare the gdt table here because i'm too lazy to write in the bootloader
         "movw $0x10, %ax\n"
         "movw %ax, %ds\n"
         "movw %ax, %es\n"
@@ -142,6 +149,14 @@ void idt_init(void)
     IDT[0x21].type_attr         = INTERRUPT_GATE;
     IDT[0x21].offset_higherbits = (keyboard_address & 0xffff0000) >> 16;
 
+    unsigned long timer_address = (unsigned long)timer_handler;
+    IDT[0x20].offset_lowerbits  = timer_address & 0xffff;
+    IDT[0x20].selector          = KERNEL_CODE_SEGMENT_OFFSET;
+    IDT[0x20].zero              = 0;
+    IDT[0x20].type_attr         = INTERRUPT_GATE;
+    IDT[0x20].offset_higherbits = (timer_address >> 16);
+
+
     /* ICW1 - begin initialization */
     write_port(0x20, 0x11);
     write_port(0xA0, 0x11);
@@ -159,14 +174,32 @@ void idt_init(void)
     write_port(0xA1, 0x01);
 
     /* mask all interrupts */
-    write_port(0x21, 0xff);
-    write_port(0xA1, 0xff);
+    write_port(0x21, 0xFC); //keyboard and timer
+    write_port(0xA1, 0xFE);
 
     idt_address = (unsigned long)IDT;
     idt_ptr[0] = (sizeof(struct IDT_entry) * IDT_SIZE) + ((idt_address & 0xffff) << 16);
     idt_ptr[1] = idt_address >> 16;
 
     load_idt(idt_ptr);
+}
+
+void pit_init() {
+    unsigned short divisor = PIT_FREQ / HZ;
+
+    write_port(0x43, 0x36);
+    write_port(0x40, divisor & 0xFF);
+    write_port(0x40, divisor >> 8);
+}
+
+void timer_callback() {
+    jiffies++;
+    write_port(0x20, 0x20);
+}
+
+
+uint32_t uptime() {
+    return jiffies / HZ;
 }
 
 
@@ -242,13 +275,27 @@ void kernel_main(void)
 
     kprint(str);
     kprint_newline();
+    struct tm t;
+    t.tm_sec = 0;
+    t.tm_min = 0;
+    t.tm_hour = 0;
+    t.tm_mday = 1;
+    t.tm_mon = 0;
+    t.tm_year = 70;
+    long result = kernel_mktime(&t);
+    kprint("epoch: ");
+    kprint_hex((uint32_t)result);
     kprint_newline();
+
 
     gdt_init();
     idt_init();
+    pit_init();
+    write_port(0x21, read_port(0x21) & ~0x01);
+    asm volatile("sti");
     kbd_init();
     kbd_enable();
-    asm volatile("sti");
+
 
     while (1);
 }
