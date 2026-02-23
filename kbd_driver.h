@@ -15,6 +15,7 @@ typedef unsigned long long u64;
 #define KEYBOARD_PORT 0x60
 #define KEYBOARD_STATUS_PORT 0x64
 #define ENTER_KEY_CODE 0x1C
+#define BACKSPACE_KEY_CODE 0x0E
 
 
 extern unsigned char keyboard_map[128];

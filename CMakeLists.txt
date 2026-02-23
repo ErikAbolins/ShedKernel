@@ -17,7 +17,9 @@ add_executable(kernel.elf boot.asm kernel.c
         kbd_driver.c
         kbd_driver.h
         mm.h
-        mm.c)
+        mm.c
+        time.h
+        kbd_driver.c)
 
 target_compile_options(kernel.elf PRIVATE
         $<$<COMPILE_LANGUAGE:C>:-ffreestanding>

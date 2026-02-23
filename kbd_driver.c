@@ -6,6 +6,7 @@
 extern char read_port(unsigned short port);
 extern void write_port(unsigned short port, unsigned char data);
 extern void kprint_newline(void);
+extern void kprint(const char *str);
 
 extern unsigned int current_loc;
 extern char *vidptr;
@@ -79,6 +80,15 @@ void kbd_handler_main(void) {
 
     if (keycode & 0x80)
         return;
+
+	if (keycode == BACKSPACE_KEY_CODE) {
+		if(current_loc >= 2) {
+		current_loc -= 2;
+		vidptr[current_loc] = ' ';
+		vidptr[current_loc + 1] = 0x07;
+		}
+		return;
+    }
 
     if (keycode == ENTER_KEY_CODE) {
         kprint_newline();

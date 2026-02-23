@@ -118,7 +118,7 @@ void gdt_init(void)
 
     asm volatile("lgdt (kgdtr)");
 
-    asm volatile( //declare the gdt table because i'm lazy
+    asm volatile( //declare the gdt table because i'm too lazy to write in the bootloader
         "movw $0x10, %ax\n"
         "movw %ax, %ds\n"
         "movw %ax, %es\n"
@@ -222,18 +222,18 @@ void kernel_main(void)
     *b = 222;
     *c = 333;
 
-    // print addresses so you can see they're different and sensible
+    // print addresses
     kprint("a: "); kprint_hex((uint32_t)a);
     kprint("b: "); kprint_hex((uint32_t)b);
     kprint("c: "); kprint_hex((uint32_t)c);
 
-    // free middle block and reallocate - tests coalescing
+    // free middle block and reallocate
     mem_free(b);
     uint32_t *d = malloc(sizeof(uint32_t));
     *d = 444;
     kprint("d: "); kprint_hex((uint32_t)d);  // should reuse b's address
 
-    // free all and reallocate big block - tests full coalescing
+    // free all and reallocate big block
     mem_free(a);
     mem_free(c);
     mem_free(d);
