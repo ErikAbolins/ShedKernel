@@ -8,8 +8,17 @@ CMakeFiles/kernel.elf.dir/kbd_driver.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/
 
 CMakeFiles/kernel.elf.dir/kernel.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kernel.c \
   /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/kprintf.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/mm.h \
-  /mnt/c/Users/Erik/Documents/OSAttempt/time.h
+  /mnt/c/Users/Erik/Documents/OSAttempt/time.h \
+  /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h \
+  /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h
+
+CMakeFiles/kernel.elf.dir/kprintf.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kprintf.c \
+  /mnt/c/Users/Erik/Documents/OSAttempt/kprintf.h \
+  /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdarg.h \
+  /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h \
+  /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h
 
 CMakeFiles/kernel.elf.dir/mm.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/mm.c \
   /mnt/c/Users/Erik/Documents/OSAttempt/mm.h
@@ -21,34 +30,47 @@ kernel.elf: /mnt/c/Users/Erik/Documents/OSAttempt/linker.ld \
   CMakeFiles/kernel.elf.dir/boot.asm.o \
   CMakeFiles/kernel.elf.dir/kbd_driver.c.o \
   CMakeFiles/kernel.elf.dir/kernel.c.o \
+  CMakeFiles/kernel.elf.dir/kprintf.c.o \
   CMakeFiles/kernel.elf.dir/mm.c.o \
   CMakeFiles/kernel.elf.dir/time.c.o
 
 
 CMakeFiles/kernel.elf.dir/time.c.o:
 
+CMakeFiles/kernel.elf.dir/kprintf.c.o:
+
+CMakeFiles/kernel.elf.dir/boot.asm.o:
+
+CMakeFiles/kernel.elf.dir/mm.c.o:
+
+CMakeFiles/kernel.elf.dir/kernel.c.o:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/linker.ld:
+
 /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.c:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/mm.c:
 
-/mnt/c/Users/Erik/Documents/OSAttempt/mm.h:
-
 /mnt/c/Users/Erik/Documents/OSAttempt/keyboard_map.h:
 
+CMakeFiles/kernel.elf.dir/kbd_driver.c.o:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/kernel.c:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/kprintf.c:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/kprintf.h:
+
 /mnt/c/Users/Erik/Documents/OSAttempt/time.c:
+
+/usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/time.h:
 
-CMakeFiles/kernel.elf.dir/boot.asm.o:
+/usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h:
 
-/mnt/c/Users/Erik/Documents/OSAttempt/kernel.c:
+/mnt/c/Users/Erik/Documents/OSAttempt/mm.h:
 
-CMakeFiles/kernel.elf.dir/kbd_driver.c.o:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/linker.ld:
-
-CMakeFiles/kernel.elf.dir/kernel.c.o:
-
-CMakeFiles/kernel.elf.dir/mm.c.o:
+/usr/lib/gcc-cross/i686-linux-gnu/14/include/stdarg.h:

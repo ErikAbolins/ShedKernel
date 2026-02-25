@@ -6,6 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/kernel.elf.dir/kbd_driver.c.o.d"
   "CMakeFiles/kernel.elf.dir/kernel.c.o"
   "CMakeFiles/kernel.elf.dir/kernel.c.o.d"
+  "CMakeFiles/kernel.elf.dir/kprintf.c.o"
+  "CMakeFiles/kernel.elf.dir/kprintf.c.o.d"
   "CMakeFiles/kernel.elf.dir/mm.c.o"
   "CMakeFiles/kernel.elf.dir/mm.c.o.d"
   "CMakeFiles/kernel.elf.dir/time.c.o"

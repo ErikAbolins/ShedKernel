@@ -185,6 +185,30 @@ kernel.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel.c.s
 .PHONY : kernel.c.s
 
+kprintf.o: kprintf.c.o
+.PHONY : kprintf.o
+
+# target to build an object file
+kprintf.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kprintf.c.o
+.PHONY : kprintf.c.o
+
+kprintf.i: kprintf.c.i
+.PHONY : kprintf.i
+
+# target to preprocess a source file
+kprintf.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kprintf.c.i
+.PHONY : kprintf.c.i
+
+kprintf.s: kprintf.c.s
+.PHONY : kprintf.s
+
+# target to generate assembly for a file
+kprintf.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kprintf.c.s
+.PHONY : kprintf.c.s
+
 mm.o: mm.c.o
 .PHONY : mm.o
 
@@ -249,6 +273,9 @@ help:
 	@echo "... kernel.o"
 	@echo "... kernel.i"
 	@echo "... kernel.s"
+	@echo "... kprintf.o"
+	@echo "... kprintf.i"
+	@echo "... kprintf.s"
 	@echo "... mm.o"
 	@echo "... mm.i"
 	@echo "... mm.s"

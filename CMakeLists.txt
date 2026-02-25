@@ -21,6 +21,8 @@ add_executable(kernel.elf boot.asm kernel.c
         kbd_driver.c
         time.c
         time.h
+        kprintf.c
+        kprintf.h
 )
 
 target_compile_options(kernel.elf PRIVATE

@@ -1,11 +1,7 @@
 #include "kbd_driver.h"
 #include "mm.h"
 #include "time.h"
-
-#define LINES 25
-#define COLUMNS_IN_LINE 80
-#define BYTES_FOR_EACH_ELEMENT 2
-#define SCREENSIZE BYTES_FOR_EACH_ELEMENT * COLUMNS_IN_LINE * LINES
+#include "kprintf.h"
 
 
 #define IDT_SIZE 256
@@ -29,8 +25,6 @@ extern void load_idt(unsigned long *idt_ptr);
 extern void kbd_handler(void);
 extern void timer_handler(void);
 volatile uint32_t jiffies = 0;
-unsigned int current_loc = 0;
-char *vidptr = (char*)0xb8000;
 
 /* TSS structure */
 struct tss {
@@ -203,42 +197,6 @@ uint32_t uptime() {
 }
 
 
-void kprint(const char *str)
-{
-    unsigned int i = 0;
-    while (str[i] != '\0') {
-        vidptr[current_loc++] = str[i++];
-        vidptr[current_loc++] = 0x07;
-    }
-}
-
-void kprint_newline(void)
-{
-    unsigned int line_size = BYTES_FOR_EACH_ELEMENT * COLUMNS_IN_LINE;
-    current_loc = current_loc + (line_size - current_loc % line_size);
-}
-
-void clear_screen(void)
-{
-    unsigned int i = 0;
-    while (i < SCREENSIZE) {
-        vidptr[i++] = ' ';
-        vidptr[i++] = 0x07;
-    }
-}
-
-//malloc test
-void kprint_hex(uint32_t val) {
-    char buf[11] = "0x00000000";
-    char hex[] = "0123456789ABCDEF";
-    for (int i = 9; i >= 2; i--) {
-        buf[i] = hex[val & 0xF];
-        val >>= 4;
-    }
-    kprint(buf);
-    kprint_newline();
-}
-
 
 void kernel_main(void)
 {
@@ -256,25 +214,25 @@ void kernel_main(void)
     *c = 333;
 
     // print addresses
-    kprint("a: "); kprint_hex((uint32_t)a);
-    kprint("b: "); kprint_hex((uint32_t)b);
-    kprint("c: "); kprint_hex((uint32_t)c);
+    kprintf("a: %x\n", (uint32_t)a);
+    kprintf("b: %x\n", (uint32_t)b);
+    kprintf("c: %x\n", (uint32_t)c);
 
     // free middle block and reallocate
     mem_free(b);
     uint32_t *d = malloc(sizeof(uint32_t));
     *d = 444;
-    kprint("d: "); kprint_hex((uint32_t)d);  // should reuse b's address
+    kprintf("d: %x\n", (uint32_t)d);  // should reuse b's address
 
     // free all and reallocate big block
     mem_free(a);
     mem_free(c);
     mem_free(d);
     uint32_t *big = malloc(1024);
-    kprint("big: "); kprint_hex((uint32_t)big);  // please work
+    kprintf("big: %x\n", (uint32_t)big);  // please work
 
-    kprint(str);
-    kprint_newline();
+    kprintf("%s\n", str);
+    kprintf("uptime: %d\n", uptime());
     struct tm t;
     t.tm_sec = 0;
     t.tm_min = 0;
@@ -283,9 +241,8 @@ void kernel_main(void)
     t.tm_mon = 0;
     t.tm_year = 70;
     long result = kernel_mktime(&t);
-    kprint("epoch: ");
-    kprint_hex((uint32_t)result);
-    kprint_newline();
+    kprintf("epoch: %x\n", (uint32_t)result);
+    kprintf("test shit \n %d", 9);
 
 
     gdt_init();
