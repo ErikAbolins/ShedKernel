@@ -1,4 +1,5 @@
 #include "mm.h"
+#include "kprintf.h"
 
 #define NULL_POINTER ((void*)0)
 #define DYNAMIC_MEM_NODE_SIZE sizeof(dynamic_mem_node_t) // 16 bytes
@@ -35,11 +36,13 @@ void *find_best_mem_block(dynamic_mem_node_t *dynamic_mem, size_t size) {
 
 
 void *malloc(size_t size) {
-    dynamic_mem_node_t *best_mem_block = (dynamic_mem_node_t *)find_best_mem_block(dynamic_mem_start, size);
-    if (best_mem_block == NULL_POINTER)
-        return NULL_POINTER;
 
-    // can we split the block?
+    dynamic_mem_node_t *best_mem_block = (dynamic_mem_node_t *)find_best_mem_block(dynamic_mem_start, size);
+
+    if (best_mem_block == NULL_POINTER) {
+        return NULL_POINTER;
+    }
+
     if (best_mem_block->size >= size + DYNAMIC_MEM_NODE_SIZE) {
         dynamic_mem_node_t *mem_node_allocate = (dynamic_mem_node_t *)(((uint8_t *)best_mem_block) + DYNAMIC_MEM_NODE_SIZE + best_mem_block->size - size - DYNAMIC_MEM_NODE_SIZE);
 
@@ -54,12 +57,13 @@ void *malloc(size_t size) {
         best_mem_block->next = mem_node_allocate;
         best_mem_block->size -= size + DYNAMIC_MEM_NODE_SIZE;
 
-        return (void *)((uint8_t *)mem_node_allocate + DYNAMIC_MEM_NODE_SIZE);
+        void *ret = (void *)((uint8_t *)mem_node_allocate + DYNAMIC_MEM_NODE_SIZE);
+        return ret;
     }
 
-    // exact fit, just take the whole block
     best_mem_block->used = true;
-    return (void *)((uint8_t *)best_mem_block + DYNAMIC_MEM_NODE_SIZE);
+    void *ret = (void *)((uint8_t *)best_mem_block + DYNAMIC_MEM_NODE_SIZE);
+    return ret;
 }
 
 void mem_free(void *p) {
@@ -76,6 +80,37 @@ void mem_free(void *p) {
     //merge unused blocks
     current_mem_node = merge_next_node_into_current(current_mem_node);
     merge_current_node_into_previous(current_mem_node);
+}
+
+void *realloc(void *p, size_t size) {
+    // realloc(NULL, size) == malloc(size)
+    if (p == NULL_POINTER)
+        return malloc(size);
+
+    // realloc(p, 0) == free(p) + return NULL
+    if (size == 0) {
+        mem_free(p);
+        return NULL_POINTER;
+    }
+
+    dynamic_mem_node_t *current_mem_node = (dynamic_mem_node_t *)((uint8_t *)p - DYNAMIC_MEM_NODE_SIZE);
+
+    // already big enough? don't bother moving house
+    if (current_mem_node->size >= size)
+        return p;
+
+    // gotta find a new place and move in
+    void *new_p = malloc(size);
+    if (new_p == NULL_POINTER)
+        return NULL_POINTER;
+
+    uint8_t *src = (uint8_t *)p;
+    uint8_t *dst = (uint8_t *)new_p;
+    for (size_t i = 0; i < current_mem_node->size; i++)
+        dst[i] = src[i];
+    mem_free(p);
+
+    return new_p;
 }
 
 

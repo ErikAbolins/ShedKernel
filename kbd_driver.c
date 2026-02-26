@@ -2,6 +2,11 @@
 #include "keyboard_map.h"
 #include "mm.h"
 
+#define KBD_BUF_SIZE 256
+static volatile char kbd_buf [KBD_BUF_SIZE];
+static volatile int kbd_buf_read = 0;
+static volatile int kbd_buf_write = 0;
+
 
 
 extern char read_port(unsigned short port);
@@ -11,6 +16,14 @@ extern void kprint(const char *str);
 
 extern unsigned int current_loc;
 extern char *vidptr;
+
+
+int kbd_getchar(void) {
+    while (kbd_buf_read == kbd_buf_write);
+    char c = kbd_buf[kbd_buf_read];
+    kbd_buf_read = (kbd_buf_read + 1) % KBD_BUF_SIZE;
+    return (int)c;
+}
 
 static driver_t state = {
     .initialized = 0,
@@ -71,38 +84,22 @@ int kbd_write(u8 data) {
 void kbd_handler_main(void) {
     u8 keycode;
 
-
     write_port(0x20, 0x20);
-
     if (!state.enabled) return;
-
-    if (kbd_read(&keycode) != DRIVER_OK)
-        return;
-
-    if (keycode & 0x80)
-        return;
-
-	if (keycode == BACKSPACE_KEY_CODE) {
-		if(current_loc >= 2) {
-		current_loc -= 2;
-        vidptr[current_loc] = ' ';
-		vidptr[current_loc + 1] = 0x07;
-
-		unsigned short cursor_pos = current_loc / 2;
-		write_port(0x3D4, 0x0F);
-		write_port(0x3D5, (unsigned char)(cursor_pos & 0xFF));
-		write_port(0x3D4, 0x0E);
-		write_port(0x3D5, (unsigned char)((cursor_pos >> 8) & 0xFF));
-
-		}
-		return;
-    }
-
+    if (kbd_read(&keycode) != DRIVER_OK) return;
+    if (keycode & 0x80) return;
+    if (keycode == BACKSPACE_KEY_CODE) { /* your backspace code */ return; }
     if (keycode == ENTER_KEY_CODE) {
+        kbd_buf[kbd_buf_write] = '\n';
+        kbd_buf_write = (kbd_buf_write + 1) % KBD_BUF_SIZE;
         kprint_newline();
         return;
     }
 
-    vidptr[current_loc++] = keyboard_map[keycode];
+    char c = keyboard_map[keycode];
+    kbd_buf[kbd_buf_write] = c;
+    kbd_buf_write = (kbd_buf_write + 1) % KBD_BUF_SIZE;
+
+    vidptr[current_loc++] = c;
     vidptr[current_loc++] = 0x07;
 }

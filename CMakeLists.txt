@@ -23,6 +23,10 @@ add_executable(kernel.elf boot.asm kernel.c
         time.h
         kprintf.c
         kprintf.h
+        Shell.c
+        Shell.h
+        string.c
+        string.h
 )
 
 target_compile_options(kernel.elf PRIVATE

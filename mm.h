@@ -7,7 +7,6 @@
 typedef unsigned int size_t;
 typedef unsigned char  uint8_t;
 typedef unsigned int   uint32_t;
-typedef unsigned int   size_t;
 typedef unsigned char  bool;
 #define true  1
 #define false 0
@@ -15,11 +14,10 @@ typedef unsigned char  bool;
 
 typedef struct dynamic_mem_node {
     uint32_t size;
-    bool used;
+    uint32_t used;
     struct dynamic_mem_node *next;
     struct dynamic_mem_node *prev;
 } dynamic_mem_node_t;
-
 
 
 void init_dynamic_mem(void);
@@ -28,6 +26,8 @@ void init_dynamic_mem(void);
 void *malloc(size_t size);
 
 void mem_free(void *p);
+
+void *realloc(void *p, size_t size);
 
 void *merge_next_node_into_current(dynamic_mem_node_t *node);
 void *merge_current_node_into_previous(dynamic_mem_node_t *node);

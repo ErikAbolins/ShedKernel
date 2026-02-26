@@ -36,6 +36,7 @@ void kbd_enable(void);
 void kbd_disable(void);
 int kbd_read(u8 *out);
 int kbd_write(u8 data);
+int kbd_getchar(void);
 void kbd_handler_main(void); //IRQ
 
 #endif //TEMPLATE_H

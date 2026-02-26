@@ -129,6 +129,30 @@ kernel.elf/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/build
 .PHONY : kernel.elf/fast
 
+Shell.o: Shell.c.o
+.PHONY : Shell.o
+
+# target to build an object file
+Shell.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/Shell.c.o
+.PHONY : Shell.c.o
+
+Shell.i: Shell.c.i
+.PHONY : Shell.i
+
+# target to preprocess a source file
+Shell.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/Shell.c.i
+.PHONY : Shell.c.i
+
+Shell.s: Shell.c.s
+.PHONY : Shell.s
+
+# target to generate assembly for a file
+Shell.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/Shell.c.s
+.PHONY : Shell.c.s
+
 boot.o: boot.asm.o
 .PHONY : boot.o
 
@@ -233,6 +257,30 @@ mm.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/mm.c.s
 .PHONY : mm.c.s
 
+string.o: string.c.o
+.PHONY : string.o
+
+# target to build an object file
+string.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/string.c.o
+.PHONY : string.c.o
+
+string.i: string.c.i
+.PHONY : string.i
+
+# target to preprocess a source file
+string.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/string.c.i
+.PHONY : string.c.i
+
+string.s: string.c.s
+.PHONY : string.s
+
+# target to generate assembly for a file
+string.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/string.c.s
+.PHONY : string.c.s
+
 time.o: time.c.o
 .PHONY : time.o
 
@@ -266,6 +314,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... kernel.elf"
+	@echo "... Shell.o"
+	@echo "... Shell.i"
+	@echo "... Shell.s"
 	@echo "... boot.o"
 	@echo "... kbd_driver.o"
 	@echo "... kbd_driver.i"
@@ -279,6 +330,9 @@ help:
 	@echo "... mm.o"
 	@echo "... mm.i"
 	@echo "... mm.s"
+	@echo "... string.o"
+	@echo "... string.i"
+	@echo "... string.s"
 	@echo "... time.o"
 	@echo "... time.i"
 	@echo "... time.s"

@@ -5,6 +5,10 @@ SECTIONS {
     .text : { *(.text*) }
     .rodata : { *(.rodata*) }
     .data : { *(.data) }
-    .bss : { *(.bss) }
+    .bss : {
+        bss_start = .;
+        *(.bss)
+        bss_end = .;
+    }
     /DISCARD/ : { *(.eh_frame) *(.comment) }
 }

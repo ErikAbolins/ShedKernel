@@ -2,6 +2,7 @@
 #include "mm.h"
 #include "time.h"
 #include "kprintf.h"
+#include "Shell.h"
 
 
 #define IDT_SIZE 256
@@ -200,51 +201,7 @@ uint32_t uptime() {
 
 void kernel_main(void)
 {
-    const char *str = "darcy poo head";
     clear_screen();
-    init_dynamic_mem();
-
-    // basic alloc
-    uint32_t *a = malloc(sizeof(uint32_t));
-    uint32_t *b = malloc(sizeof(uint32_t));
-    uint32_t *c = malloc(sizeof(uint32_t));
-
-    *a = 111;
-    *b = 222;
-    *c = 333;
-
-    // print addresses
-    kprintf("a: %x\n", (uint32_t)a);
-    kprintf("b: %x\n", (uint32_t)b);
-    kprintf("c: %x\n", (uint32_t)c);
-
-    // free middle block and reallocate
-    mem_free(b);
-    uint32_t *d = malloc(sizeof(uint32_t));
-    *d = 444;
-    kprintf("d: %x\n", (uint32_t)d);  // should reuse b's address
-
-    // free all and reallocate big block
-    mem_free(a);
-    mem_free(c);
-    mem_free(d);
-    uint32_t *big = malloc(1024);
-    kprintf("big: %x\n", (uint32_t)big);  // please work
-
-    kprintf("%s\n", str);
-    kprintf("uptime: %d\n", uptime());
-    struct tm t;
-    t.tm_sec = 0;
-    t.tm_min = 0;
-    t.tm_hour = 0;
-    t.tm_mday = 1;
-    t.tm_mon = 0;
-    t.tm_year = 70;
-    long result = kernel_mktime(&t);
-    kprintf("epoch: %x\n", (uint32_t)result);
-    kprintf("test shit \n %d", 9);
-
-
     gdt_init();
     idt_init();
     pit_init();
@@ -252,7 +209,7 @@ void kernel_main(void)
     asm volatile("sti");
     kbd_init();
     kbd_enable();
-
-
+    init_dynamic_mem();
+    lsh_loop();
     while (1);
 }

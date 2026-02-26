@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/kernel.elf.dir/link.d"
+  "CMakeFiles/kernel.elf.dir/Shell.c.o"
+  "CMakeFiles/kernel.elf.dir/Shell.c.o.d"
   "CMakeFiles/kernel.elf.dir/boot.asm.o"
   "CMakeFiles/kernel.elf.dir/boot.asm.o.d"
   "CMakeFiles/kernel.elf.dir/kbd_driver.c.o"
@@ -10,6 +12,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/kernel.elf.dir/kprintf.c.o.d"
   "CMakeFiles/kernel.elf.dir/mm.c.o"
   "CMakeFiles/kernel.elf.dir/mm.c.o.d"
+  "CMakeFiles/kernel.elf.dir/string.c.o"
+  "CMakeFiles/kernel.elf.dir/string.c.o.d"
   "CMakeFiles/kernel.elf.dir/time.c.o"
   "CMakeFiles/kernel.elf.dir/time.c.o.d"
   "kernel.elf"

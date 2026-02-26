@@ -17,6 +17,8 @@ global timer_handler
 extern kernel_main
 extern kbd_handler_main
 extern timer_callback
+extern bss_start
+extern bss_end
 
 read_port:
     mov edx, [esp + 4]
@@ -50,6 +52,14 @@ timer_handler:
 _start:
     cli
     mov esp, stack_space
+
+    ;zero BSS
+    mov edi, bss_start
+    mov ecx, bss_end
+    sub ecx, edi
+    xor eax, eax
+    rep stosd
+
     call kernel_main
     hlt
 
