@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/Users/Erik/Documents/OSAttempt/boot.asm" "CMakeFiles/kernel.elf.dir/boot.asm.o" "gcc" "CMakeFiles/kernel.elf.dir/boot.asm.o.d"
   "/mnt/c/Users/Erik/Documents/OSAttempt/Shell.c" "CMakeFiles/kernel.elf.dir/Shell.c.o" "gcc" "CMakeFiles/kernel.elf.dir/Shell.c.o.d"
+  "/mnt/c/Users/Erik/Documents/OSAttempt/easyfs.c" "CMakeFiles/kernel.elf.dir/easyfs.c.o" "gcc" "CMakeFiles/kernel.elf.dir/easyfs.c.o.d"
   "/mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.c" "CMakeFiles/kernel.elf.dir/kbd_driver.c.o" "gcc" "CMakeFiles/kernel.elf.dir/kbd_driver.c.o.d"
   "/mnt/c/Users/Erik/Documents/OSAttempt/kernel.c" "CMakeFiles/kernel.elf.dir/kernel.c.o" "gcc" "CMakeFiles/kernel.elf.dir/kernel.c.o.d"
   "/mnt/c/Users/Erik/Documents/OSAttempt/kprintf.c" "CMakeFiles/kernel.elf.dir/kprintf.c.o" "gcc" "CMakeFiles/kernel.elf.dir/kprintf.c.o.d"

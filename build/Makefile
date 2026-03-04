@@ -161,6 +161,30 @@ boot.asm.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/boot.asm.o
 .PHONY : boot.asm.o
 
+easyfs.o: easyfs.c.o
+.PHONY : easyfs.o
+
+# target to build an object file
+easyfs.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/easyfs.c.o
+.PHONY : easyfs.c.o
+
+easyfs.i: easyfs.c.i
+.PHONY : easyfs.i
+
+# target to preprocess a source file
+easyfs.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/easyfs.c.i
+.PHONY : easyfs.c.i
+
+easyfs.s: easyfs.c.s
+.PHONY : easyfs.s
+
+# target to generate assembly for a file
+easyfs.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/easyfs.c.s
+.PHONY : easyfs.c.s
+
 kbd_driver.o: kbd_driver.c.o
 .PHONY : kbd_driver.o
 
@@ -318,6 +342,9 @@ help:
 	@echo "... Shell.i"
 	@echo "... Shell.s"
 	@echo "... boot.o"
+	@echo "... easyfs.o"
+	@echo "... easyfs.i"
+	@echo "... easyfs.s"
 	@echo "... kbd_driver.o"
 	@echo "... kbd_driver.i"
 	@echo "... kbd_driver.s"

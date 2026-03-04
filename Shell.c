@@ -3,6 +3,7 @@
 #include "kprintf.h"
 #include "string.h"
 #include "kbd_driver.h"
+#include "easyfs.h"
 
 #define LSH_RL_BUFSIZE 1024
 #define LSH_TOK_BUFSIZE 64
@@ -17,14 +18,22 @@
 /* ========================= */
 
 int lsh_help(char **args);
+int lsh_ls(char **args);
+int lsh_touch(char **args);
+int lsh_del(char **args);
 int lsh_launch(char **args);
 
 char *builtin_str[] = {
-    "help"
+    "help",
+	"ls",
+	"touch",
+    "del"
 };
 
 int (*builtin_func[]) (char **) = {
-    &lsh_help
+    &lsh_help,
+	&lsh_ls,
+	&lsh_touch
 };
 
 /* ========================= */
@@ -87,6 +96,10 @@ char *lsh_read_line(void) {
 
     while (1) {
         c = kbd_getchar();
+		if (c == '\b') {
+			if(position > 0) position--;
+			continue;
+		}
 
         if (c == EOF || c == '\n') {
             buffer[position] = '\0';
@@ -165,6 +178,33 @@ int lsh_help(char **args) {
 
     return 1;
 }
+
+
+int lsh_ls(char **args) {
+    fs_list_files();
+    return 1;
+}
+
+int lsh_touch(char **args) {
+	fs_create_file(args[1]);
+	if(args[1] == NULL) {
+	  kprintf("Touch: no file name given\n");
+	  return 0;
+	}
+	return 1;
+
+}
+
+
+int lsh_del(char **args) {
+	fs_delete_file(args[1]);
+	if(args[1] == NULL) {
+	 kprintf("Del: no file name given\n");
+	 return 0;
+	}
+	return 1;
+}
+
 
 /* ========================= */
 

@@ -88,7 +88,22 @@ void kbd_handler_main(void) {
     if (!state.enabled) return;
     if (kbd_read(&keycode) != DRIVER_OK) return;
     if (keycode & 0x80) return;
-    if (keycode == BACKSPACE_KEY_CODE) { /* your backspace code */ return; }
+    if (keycode == BACKSPACE_KEY_CODE) {
+        kbd_buf[kbd_buf_write] = '\b';
+        kbd_buf_write = (kbd_buf_write + 1) % KBD_BUF_SIZE;
+        if (current_loc >= 2) {
+            current_loc -= 2;
+            vidptr[current_loc] = ' ';
+            vidptr[current_loc + 1] = 0x07;
+
+            unsigned short cursor_pos = current_loc / 2;
+            write_port(0x3D4, 0x0F);
+            write_port(0x3D5, (unsigned char)(cursor_pos & 0xFF));
+            write_port(0x3D4, 0x0E);
+            write_port(0x3D5, (unsigned char)((cursor_pos >> 8) & 0xFF));
+        }
+        return;
+    }
     if (keycode == ENTER_KEY_CODE) {
         kbd_buf[kbd_buf_write] = '\n';
         kbd_buf_write = (kbd_buf_write + 1) % KBD_BUF_SIZE;

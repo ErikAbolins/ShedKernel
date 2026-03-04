@@ -3,7 +3,7 @@
 #include "time.h"
 #include "kprintf.h"
 #include "Shell.h"
-
+#include "easyfs.h"
 
 #define IDT_SIZE 256
 #define GDT_SIZE 8
@@ -210,6 +210,7 @@ void kernel_main(void)
     kbd_init();
     kbd_enable();
     init_dynamic_mem();
+	fs_init();
     lsh_loop();
     while (1);
 }

@@ -27,6 +27,10 @@ add_executable(kernel.elf boot.asm kernel.c
         Shell.h
         string.c
         string.h
+        easyfs.c
+        easyfs.h
+        fs_config.h
+        fs_types.h
 )
 
 target_compile_options(kernel.elf PRIVATE
