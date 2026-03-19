@@ -101,6 +101,7 @@ CMakeFiles/kernel.elf.dir/time.c.o
 
 kernel.elf
  /mnt/c/Users/Erik/Documents/OSAttempt/linker.ld
+ /mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o
  /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir/Shell.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir/boot.asm.o
  /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir/easyfs.c.o

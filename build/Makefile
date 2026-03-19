@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named user_binary
+
+# Build rule for target.
+user_binary: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 user_binary
+.PHONY : user_binary
+
+# fast build rule for target.
+user_binary/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/user_binary.dir/build.make CMakeFiles/user_binary.dir/build
+.PHONY : user_binary/fast
+
+#=============================================================================
 # Target rules for targets named kernel.elf
 
 # Build rule for target.
@@ -361,6 +374,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... user_binary"
 	@echo "... kernel.elf"
 	@echo "... Shell.o"
 	@echo "... Shell.i"

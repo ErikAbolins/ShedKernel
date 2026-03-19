@@ -91,6 +91,7 @@ CMakeFiles/kernel.elf.dir/time.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/time.c
   /mnt/c/Users/Erik/Documents/OSAttempt/time.h
 
 kernel.elf: /mnt/c/Users/Erik/Documents/OSAttempt/linker.ld \
+  /mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o \
   CMakeFiles/kernel.elf.dir/Shell.c.o \
   CMakeFiles/kernel.elf.dir/boot.asm.o \
   CMakeFiles/kernel.elf.dir/easyfs.c.o \
@@ -116,6 +117,8 @@ CMakeFiles/kernel.elf.dir/kernel.c.o:
 CMakeFiles/kernel.elf.dir/kbd_driver.c.o:
 
 CMakeFiles/kernel.elf.dir/ed.c.o:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o:
 
 /usr/lib/gcc-cross/i686-linux-gnu/14/include/stddef.h:
 

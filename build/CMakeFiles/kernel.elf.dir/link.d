@@ -1,5 +1,6 @@
 kernel.elf: \
   /mnt/c/Users/Erik/Documents/OSAttempt/linker.ld \
+  /mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o \
   CMakeFiles/kernel.elf.dir/boot.asm.o \
   CMakeFiles/kernel.elf.dir/kernel.c.o \
   CMakeFiles/kernel.elf.dir/kbd_driver.c.o \
@@ -12,6 +13,8 @@ kernel.elf: \
   CMakeFiles/kernel.elf.dir/ed.c.o
 
 /mnt/c/Users/Erik/Documents/OSAttempt/linker.ld:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o:
 
 CMakeFiles/kernel.elf.dir/boot.asm.o:
 

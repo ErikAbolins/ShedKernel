@@ -13,12 +13,18 @@ global read_port
 global write_port
 global load_idt
 global timer_handler
+global syscall_handler
 
 extern kernel_main
 extern kbd_handler_main
 extern timer_callback
 extern bss_start
 extern bss_end
+extern syscall_dispatch
+extern kernel_esp_save
+extern exit_requested
+extern lsh_loop
+
 
 read_port:
     mov edx, [esp + 4]
@@ -48,6 +54,42 @@ timer_handler:
     call timer_callback
     popa
     iretd
+
+syscall_handler:
+    push eax
+    mov ax, 0x10
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
+    pop eax
+    pusha
+    mov eax, [esp + 28]
+    mov ebx, [esp + 16]
+    push ebx
+    push eax
+    call syscall_dispatch
+    add esp, 8
+    mov [esp + 28], eax    ; store return value into pusha'd eax
+
+    mov eax, [exit_requested]
+    test eax, eax
+    jnz .do_exit
+
+    popa
+    iretd
+
+.do_exit:
+    mov dword [exit_requested], 0
+    mov ax, 0x10
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
+    mov esp, [kernel_esp_save]
+    call lsh_loop
+    hlt
+
 
 _start:
     cli

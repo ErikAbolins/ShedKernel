@@ -24,8 +24,9 @@ u32 *page_table_kernel = (u32*)0x9D000;
 u32 *page_table_kernel2 = (u32*)0x9E000;
 
 
-
-
+typedef struct {
+    u32 edi, esi, ebp, esp, ebx, edx, ecx, eax;
+} registers_t;
 
 
 
@@ -43,6 +44,10 @@ extern void load_idt(unsigned long *idt_ptr);
 extern void kbd_handler(void);
 extern void timer_handler(void);
 extern u32 kernel_end;
+extern char _binary_user_flat_start[];
+extern char _binary_user_flat_end[];
+u32 kernel_esp_save = 0;
+u32 exit_requested = 0;
 volatile uint32_t jiffies = 0;
 
 /* TSS structure */
@@ -156,7 +161,7 @@ void gdt_init(void)
 {
     default_tss.io_map = 0x00;
     default_tss.esp0   = 0x1FFF0;
-    default_tss.ss0    = 0x18;
+    default_tss.ss0    = 0x10;
 
     init_gdt_descriptor(0x0, 0x0,      0x00, 0x00, &kgdt[0]); /* null */
     init_gdt_descriptor(0x0, 0xFFFFF,  0x9B, 0x0D, &kgdt[1]); /* kernel code */
@@ -164,7 +169,7 @@ void gdt_init(void)
     init_gdt_descriptor(0x0, 0x0,      0x97, 0x0D, &kgdt[3]); /* kernel stack */
     init_gdt_descriptor(0x0, 0xFFFFF,  0xFF, 0x0D, &kgdt[4]); /* user code */
     init_gdt_descriptor(0x0, 0xFFFFF,  0xF3, 0x0D, &kgdt[5]); /* user data */
-    init_gdt_descriptor(0x0, 0x0,      0xF7, 0x0D, &kgdt[6]); /* user stack */
+    init_gdt_descriptor(0x0, 0xFFFFF, 0xF7, 0x0D, &kgdt[6]); /* user stack */
     init_gdt_descriptor((u32)&default_tss, 0x67, 0xE9, 0x00, &kgdt[7]); /* TSS */
 
     kgdtr.limite = sizeof(kgdt) - 1;
@@ -191,6 +196,7 @@ void idt_init(void)
     unsigned long keyboard_address;
     unsigned long idt_address;
     unsigned long idt_ptr[2];
+    extern void syscall_handler(void);
 
     keyboard_address = (unsigned long)kbd_handler;
     IDT[0x21].offset_lowerbits  = keyboard_address & 0xffff;
@@ -205,6 +211,12 @@ void idt_init(void)
     IDT[0x20].zero              = 0;
     IDT[0x20].type_attr         = INTERRUPT_GATE;
     IDT[0x20].offset_higherbits = (timer_address >> 16);
+
+    IDT[0x80].offset_lowerbits  = ((u32)syscall_handler) & 0xffff;
+    IDT[0x80].selector          = KERNEL_CODE_SEGMENT_OFFSET;
+    IDT[0x80].zero              = 0;
+    IDT[0x80].type_attr         = 0xEF;
+    IDT[0x80].offset_higherbits = ((u32)syscall_handler >> 16);
 
 
     /* ICW1 - begin initialization */
@@ -253,26 +265,49 @@ uint32_t uptime() {
 }
 
 void jump_to_userspace(void) {
-    kprintf("user code byte: %x\n", *(u8*)0xA0000000);
-    kprintf("about to iret to ring 3\n");
+    asm volatile("mov %%esp, %0" : "=r"(kernel_esp_save));
     asm volatile(
-        "mov $0x33, %%ax\n"
+        "mov $0x2B, %%ax\n"   // user DATA segment, not stack
         "mov %%ax, %%ds\n"
         "mov %%ax, %%es\n"
         "mov %%ax, %%fs\n"
         "mov %%ax, %%gs\n"
-        "push $0x33\n"        // SS
-        "push $0xB0001000\n"  // user stack top
-        "pushf\n"             // EFLAGS
-        "push $0x23\n"        // user CS
-        "push $0xA0000000\n"  // user EIP
+        "push $0x33\n"        // SS = user stack
+        "push $0xB0000FF0\n"
+        "pushf\n"
+        "push $0x23\n"        // CS = user code
+        "push $0xA0000020\n"
         "iret\n"
         : : : "eax"
     );
 }
 
+u32 syscall_dispatch(u32 syscall_num, u32 arg1) {
+    switch (syscall_num) {
+        case 0:
+            exit_requested = 1;
+            return 0;
+        case 1:
+            kprintf("%s", (char*)arg1);
+            return 0;
+        case 2:
+            return (u32)kbd_getchar();
+        case 3:
+            return (u32)malloc((size_t)arg1);
+        case 4:
+            mem_free((void*)arg1);
+            return 0;
+        default:
+            kprintf("unknown syscall %d\n", syscall_num);
+            return 0xFFFFFFFF;
+    }
+}
+
+
+
 
 void kernel_main(void) {
+
     clear_screen();
     gdt_init();
     paging_alloc_init();
@@ -284,8 +319,13 @@ void kernel_main(void) {
     map_user_page(0xB0000000, user_stack_phys);
 
     u8 *user_code = (u8*)0xA0000000;
-    user_code[0] = 0xEB;
-    user_code[1] = 0xFE;
+    char *src = _binary_user_flat_start;
+    int i = 0;
+    while (src < _binary_user_flat_end)
+        user_code[i++] = *src++;
+
+
+
 
     idt_init();
     pit_init();
