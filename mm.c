@@ -1,12 +1,36 @@
 #include "mm.h"
 #include "kprintf.h"
+#include <stdint.h>
 
 #define NULL_POINTER ((void*)0)
 #define DYNAMIC_MEM_NODE_SIZE sizeof(dynamic_mem_node_t) // 16 bytes
 
+typedef unsigned int   u32;
+
+extern u32 kernel_end;
+
+//Page frame allocation definitions
+#define PAGE_SIZE 4096
+#define PHYS_MEM_END 0x800000
+
 
 static uint8_t dynamic_mem_area[DYNAMIC_MEM_TOTAL_SIZE];
 static dynamic_mem_node_t *dynamic_mem_start;
+static u32 next_free_page = 0;
+
+
+void paging_alloc_init() {
+    next_free_page = ((u32)&kernel_end + 0xFFF) & ~0xFFF;
+}
+
+
+u32 alloc_page_frame() {
+    if (next_free_page >= PHYS_MEM_END)
+        return 0;
+    u32 addr = next_free_page;
+    next_free_page += PAGE_SIZE;
+    return addr;
+}
 
 
 void init_dynamic_mem() {

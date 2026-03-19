@@ -7,6 +7,7 @@
 typedef unsigned int size_t;
 typedef unsigned char  uint8_t;
 typedef unsigned int   uint32_t;
+typedef unsigned int u32;
 #define true  1
 #define false 0
 
@@ -30,5 +31,9 @@ void *realloc(void *p, size_t size);
 
 void *merge_next_node_into_current(dynamic_mem_node_t *node);
 void *merge_current_node_into_previous(dynamic_mem_node_t *node);
+
+void paging_alloc_init();
+u32 alloc_page_frame();
+
 
 #endif /* MM_H */

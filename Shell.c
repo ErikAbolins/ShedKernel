@@ -13,6 +13,7 @@
 
 extern char *vidptr;
 extern unsigned int current_loc;
+extern void jump_to_userspace(void);
 
 /* ========================= */
 /* Builtins                  */
@@ -25,6 +26,7 @@ int lsh_del(char **args);
 int lsh_edit(char **args);
 int lsh_clear(char **args);
 int lsh_launch(char **args);
+int lsh_ring3(char **args);
 
 char *builtin_str[] = {
     "help",
@@ -32,7 +34,8 @@ char *builtin_str[] = {
     "touch",
     "del",
     "edit",
-    "clear"
+    "clear",
+    "ring3"
 };
 
 int (*builtin_func[]) (char **) = {
@@ -41,7 +44,9 @@ int (*builtin_func[]) (char **) = {
     &lsh_touch,
     &lsh_del,
     &lsh_edit,
-    &lsh_clear
+    &lsh_clear,
+    &lsh_ring3
+
 };
 
 /* ========================= */
@@ -235,6 +240,13 @@ int lsh_clear(char **args) {
     clear_screen();
     return 1;
 }
+
+int lsh_ring3(char **args) {
+    (void)args;
+    jump_to_userspace();
+    return 1;
+}
+
 
 /* ========================= */
 

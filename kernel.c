@@ -13,6 +13,22 @@
 #define GDTBASE 0x00000800
 
 
+//Paging
+#define PAGE_PRESENT (1 << 0)
+#define PAGE_WRITE (1 << 1)
+#define PAGE_USER (1 << 2)
+
+
+u32 *page_directory    = (u32*)0x9C000;
+u32 *page_table_kernel = (u32*)0x9D000;
+u32 *page_table_kernel2 = (u32*)0x9E000;
+
+
+
+
+
+
+
 #define PIT_FREQ 1193180
 #define HZ 100
 
@@ -26,6 +42,7 @@ extern void write_port(unsigned short port, unsigned char data);
 extern void load_idt(unsigned long *idt_ptr);
 extern void kbd_handler(void);
 extern void timer_handler(void);
+extern u32 kernel_end;
 volatile uint32_t jiffies = 0;
 
 /* TSS structure */
@@ -58,6 +75,42 @@ void *memcpy(void *dest, const void *src, unsigned int n)
         *d++ = *s++;
     return dest;
 }
+
+
+
+void init_paging() {
+    for (int i = 0; i < 1024; i++) {
+        page_directory[i] = 0;
+        page_table_kernel[i]  = (i * 0x1000) | PAGE_PRESENT | PAGE_WRITE;
+        page_table_kernel2[i] = ((0x400000 + i * 0x1000)) | PAGE_PRESENT | PAGE_WRITE;
+    }
+
+    page_directory[0] = (u32)page_table_kernel  | PAGE_PRESENT | PAGE_WRITE;
+    page_directory[1] = (u32)page_table_kernel2 | PAGE_PRESENT | PAGE_WRITE;
+
+    asm volatile(
+        "mov %0, %%cr3\n"
+        "mov %%cr0, %%eax\n"
+        "or $0x80000000, %%eax\n"
+        "mov %%eax, %%cr0\n"
+        : : "r"(page_directory) : "eax"
+    );
+}
+
+
+void map_user_page(u32 virt, u32 phys) {
+    u32 dir_idx = virt >> 22;
+    u32 table_idx = (virt >> 12) & 0x3FF;
+
+    if (!(page_directory[dir_idx] & PAGE_PRESENT)) {
+        u32 new_table = alloc_page_frame();
+        page_directory[dir_idx] = new_table | PAGE_PRESENT | PAGE_WRITE | PAGE_USER;
+    }
+
+    u32 *table = (u32*)(page_directory[dir_idx] & ~0xFFF);
+    table[table_idx] = phys | PAGE_PRESENT | PAGE_WRITE | PAGE_USER;
+}
+
 
 /* IDT */
 struct IDT_entry {
@@ -130,6 +183,7 @@ void gdt_init(void)
         "ljmp $0x08, $1f\n"
         "1:\n"
     );
+    asm volatile("ltr %%ax" : : "a"(0x38)); //TSS loading
 }
 
 void idt_init(void)
@@ -198,11 +252,41 @@ uint32_t uptime() {
     return jiffies / HZ;
 }
 
+void jump_to_userspace(void) {
+    kprintf("user code byte: %x\n", *(u8*)0xA0000000);
+    kprintf("about to iret to ring 3\n");
+    asm volatile(
+        "mov $0x33, %%ax\n"
+        "mov %%ax, %%ds\n"
+        "mov %%ax, %%es\n"
+        "mov %%ax, %%fs\n"
+        "mov %%ax, %%gs\n"
+        "push $0x33\n"        // SS
+        "push $0xB0001000\n"  // user stack top
+        "pushf\n"             // EFLAGS
+        "push $0x23\n"        // user CS
+        "push $0xA0000000\n"  // user EIP
+        "iret\n"
+        : : : "eax"
+    );
+}
 
-void kernel_main(void)
-{
+
+void kernel_main(void) {
     clear_screen();
     gdt_init();
+    paging_alloc_init();
+    init_paging();
+
+    u32 user_code_phys  = alloc_page_frame();
+    u32 user_stack_phys = alloc_page_frame();
+    map_user_page(0xA0000000, user_code_phys);
+    map_user_page(0xB0000000, user_stack_phys);
+
+    u8 *user_code = (u8*)0xA0000000;
+    user_code[0] = 0xEB;
+    user_code[1] = 0xFE;
+
     idt_init();
     pit_init();
     write_port(0x21, read_port(0x21) & ~0x01);
@@ -210,9 +294,8 @@ void kernel_main(void)
     kbd_init();
     kbd_enable();
     init_dynamic_mem();
-	fs_init();
+    fs_init();
     initShell();
     lsh_loop();
-    while (1);
-
+    while(1);
 }
