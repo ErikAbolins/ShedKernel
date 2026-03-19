@@ -5,6 +5,7 @@ CMakeFiles/kernel.elf.dir/Shell.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/Shell.c
  /mnt/c/Users/Erik/Documents/OSAttempt/Shell.h
  /mnt/c/Users/Erik/Documents/OSAttempt/easyfs.h
+ /mnt/c/Users/Erik/Documents/OSAttempt/ed.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs_config.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs_types.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h
@@ -27,6 +28,20 @@ CMakeFiles/kernel.elf.dir/easyfs.c.o
  /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h
  /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h
 
+CMakeFiles/kernel.elf.dir/ed.c.o
+ /mnt/c/Users/Erik/Documents/OSAttempt/ed.c
+ /mnt/c/Users/Erik/Documents/OSAttempt/easyfs.h
+ /mnt/c/Users/Erik/Documents/OSAttempt/ed.h
+ /mnt/c/Users/Erik/Documents/OSAttempt/fs_config.h
+ /mnt/c/Users/Erik/Documents/OSAttempt/fs_types.h
+ /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h
+ /mnt/c/Users/Erik/Documents/OSAttempt/kprintf.h
+ /mnt/c/Users/Erik/Documents/OSAttempt/mm.h
+ /mnt/c/Users/Erik/Documents/OSAttempt/string.h
+ /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdbool.h
+ /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h
+ /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h
+
 CMakeFiles/kernel.elf.dir/kbd_driver.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.c
  /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h
@@ -37,6 +52,7 @@ CMakeFiles/kernel.elf.dir/kernel.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel.c
  /mnt/c/Users/Erik/Documents/OSAttempt/Shell.h
  /mnt/c/Users/Erik/Documents/OSAttempt/easyfs.h
+ /mnt/c/Users/Erik/Documents/OSAttempt/ed.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs_config.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs_types.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h
@@ -88,6 +104,7 @@ kernel.elf
  /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir/Shell.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir/boot.asm.o
  /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir/easyfs.c.o
+ /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir/ed.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir/kbd_driver.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir/kernel.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir/kprintf.c.o

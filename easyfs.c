@@ -37,6 +37,11 @@ void fs_init(void) {
 
 
 void fs_write_block(uint32_t block, const void *buf) {
+    if (block >= TOTAL_BLOCKS || !buf) {
+        kprintf("easyfs: failed to write block. Invalid block or buffer\n");
+        return;
+    }
+
     uint8_t *dst = fs_disk + block * BLOCK_SIZE;
     const uint8_t *src = buf;
     for (int i = 0; i < BLOCK_SIZE; i++)

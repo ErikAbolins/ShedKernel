@@ -3,6 +3,7 @@
 
 /* Main loop */
 void lsh_loop(void);
+void initShell(void);
 
 /* Input handling */
 char *lsh_read_line(void);

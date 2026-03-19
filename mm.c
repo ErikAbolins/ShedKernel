@@ -93,6 +93,12 @@ void *realloc(void *p, size_t size) {
         return NULL_POINTER;
     }
 
+    // bounds check
+    if ((void*)p < (void*)dynamic_mem_area ||
+        (void*)p >= (void*)dynamic_mem_area + DYNAMIC_MEM_TOTAL_SIZE) {
+        return NULL_POINTER;
+    }
+
     dynamic_mem_node_t *current_mem_node = (dynamic_mem_node_t *)((uint8_t *)p - DYNAMIC_MEM_NODE_SIZE);
 
     // already big enough? don't bother moving house

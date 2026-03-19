@@ -4,6 +4,7 @@
 #include "kprintf.h"
 #include "Shell.h"
 #include "easyfs.h"
+#include "ed.h"
 
 #define IDT_SIZE 256
 #define GDT_SIZE 8
@@ -198,7 +199,6 @@ uint32_t uptime() {
 }
 
 
-
 void kernel_main(void)
 {
     clear_screen();
@@ -211,6 +211,8 @@ void kernel_main(void)
     kbd_enable();
     init_dynamic_mem();
 	fs_init();
+    initShell();
     lsh_loop();
     while (1);
+
 }

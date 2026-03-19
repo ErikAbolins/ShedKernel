@@ -185,6 +185,30 @@ easyfs.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/easyfs.c.s
 .PHONY : easyfs.c.s
 
+ed.o: ed.c.o
+.PHONY : ed.o
+
+# target to build an object file
+ed.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/ed.c.o
+.PHONY : ed.c.o
+
+ed.i: ed.c.i
+.PHONY : ed.i
+
+# target to preprocess a source file
+ed.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/ed.c.i
+.PHONY : ed.c.i
+
+ed.s: ed.c.s
+.PHONY : ed.s
+
+# target to generate assembly for a file
+ed.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/ed.c.s
+.PHONY : ed.c.s
+
 kbd_driver.o: kbd_driver.c.o
 .PHONY : kbd_driver.o
 
@@ -345,6 +369,9 @@ help:
 	@echo "... easyfs.o"
 	@echo "... easyfs.i"
 	@echo "... easyfs.s"
+	@echo "... ed.o"
+	@echo "... ed.i"
+	@echo "... ed.s"
 	@echo "... kbd_driver.o"
 	@echo "... kbd_driver.i"
 	@echo "... kbd_driver.s"

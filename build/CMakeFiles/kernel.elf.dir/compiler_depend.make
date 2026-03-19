@@ -4,6 +4,7 @@
 CMakeFiles/kernel.elf.dir/Shell.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/Shell.c \
   /mnt/c/Users/Erik/Documents/OSAttempt/Shell.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/easyfs.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/ed.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/fs_config.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/fs_types.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h \
@@ -25,6 +26,19 @@ CMakeFiles/kernel.elf.dir/easyfs.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/easy
   /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h \
   /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h
 
+CMakeFiles/kernel.elf.dir/ed.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/ed.c \
+  /mnt/c/Users/Erik/Documents/OSAttempt/easyfs.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/ed.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/fs_config.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/fs_types.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/kprintf.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/mm.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/string.h \
+  /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdbool.h \
+  /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h \
+  /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h
+
 CMakeFiles/kernel.elf.dir/kbd_driver.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.c \
   /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/keyboard_map.h \
@@ -33,6 +47,7 @@ CMakeFiles/kernel.elf.dir/kbd_driver.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/
 CMakeFiles/kernel.elf.dir/kernel.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kernel.c \
   /mnt/c/Users/Erik/Documents/OSAttempt/Shell.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/easyfs.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/ed.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/fs_config.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/fs_types.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h \
@@ -79,6 +94,7 @@ kernel.elf: /mnt/c/Users/Erik/Documents/OSAttempt/linker.ld \
   CMakeFiles/kernel.elf.dir/Shell.c.o \
   CMakeFiles/kernel.elf.dir/boot.asm.o \
   CMakeFiles/kernel.elf.dir/easyfs.c.o \
+  CMakeFiles/kernel.elf.dir/ed.c.o \
   CMakeFiles/kernel.elf.dir/kbd_driver.c.o \
   CMakeFiles/kernel.elf.dir/kernel.c.o \
   CMakeFiles/kernel.elf.dir/kprintf.c.o \
@@ -99,7 +115,7 @@ CMakeFiles/kernel.elf.dir/kernel.c.o:
 
 CMakeFiles/kernel.elf.dir/kbd_driver.c.o:
 
-CMakeFiles/kernel.elf.dir/boot.asm.o:
+CMakeFiles/kernel.elf.dir/ed.c.o:
 
 /usr/lib/gcc-cross/i686-linux-gnu/14/include/stddef.h:
 
@@ -111,7 +127,9 @@ CMakeFiles/kernel.elf.dir/boot.asm.o:
 
 /usr/i686-linux-gnu/include/stdc-predef.h:
 
-/mnt/c/Users/Erik/Documents/OSAttempt/Shell.c:
+/usr/i686-linux-gnu/include/features.h:
+
+/usr/i686-linux-gnu/include/features-time64.h:
 
 /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdbool.h:
 
@@ -120,12 +138,6 @@ CMakeFiles/kernel.elf.dir/boot.asm.o:
 /mnt/c/Users/Erik/Documents/OSAttempt/mm.h:
 
 /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdarg.h:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/time.c:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/easyfs.c:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/time.h:
 
@@ -139,11 +151,23 @@ CMakeFiles/kernel.elf.dir/easyfs.c.o:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/keyboard_map.h:
 
+CMakeFiles/kernel.elf.dir/boot.asm.o:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/ed.h:
+
 /mnt/c/Users/Erik/Documents/OSAttempt/easyfs.h:
 
 /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h:
 
-/usr/i686-linux-gnu/include/features.h:
+/mnt/c/Users/Erik/Documents/OSAttempt/Shell.c:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/time.c:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/ed.c:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.h:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/easyfs.c:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/kbd_driver.c:
 
@@ -166,8 +190,6 @@ CMakeFiles/kernel.elf.dir/Shell.c.o:
 /usr/i686-linux-gnu/include/bits/types/__locale_t.h:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/mm.c:
-
-/usr/i686-linux-gnu/include/features-time64.h:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/string.c:
 

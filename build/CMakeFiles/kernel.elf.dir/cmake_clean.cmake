@@ -6,6 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/kernel.elf.dir/boot.asm.o.d"
   "CMakeFiles/kernel.elf.dir/easyfs.c.o"
   "CMakeFiles/kernel.elf.dir/easyfs.c.o.d"
+  "CMakeFiles/kernel.elf.dir/ed.c.o"
+  "CMakeFiles/kernel.elf.dir/ed.c.o.d"
   "CMakeFiles/kernel.elf.dir/kbd_driver.c.o"
   "CMakeFiles/kernel.elf.dir/kbd_driver.c.o.d"
   "CMakeFiles/kernel.elf.dir/kernel.c.o"
