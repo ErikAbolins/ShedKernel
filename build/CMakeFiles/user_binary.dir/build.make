@@ -68,9 +68,9 @@ include CMakeFiles/user_binary.dir/progress.make
 
 CMakeFiles/user_binary: /mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o
 
-/mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o: /mnt/c/Users/Erik/Documents/OSAttempt/user.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building userspace binary"
-	i686-linux-gnu-gcc -m32 -nostdlib -nostdinc -ffreestanding -fno-pic -fno-pie -no-pie -nostartfiles -T /mnt/c/Users/Erik/Documents/OSAttempt/user.ld -o /mnt/c/Users/Erik/Documents/OSAttempt/user.elf /mnt/c/Users/Erik/Documents/OSAttempt/user.c
+/mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o: /mnt/c/Users/Erik/Documents/OSAttempt/user/user.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building userspace test binary"
+	i686-linux-gnu-gcc -m32 -nostdlib -nostdinc -ffreestanding -fno-pic -fno-pie -no-pie -nostartfiles -T /mnt/c/Users/Erik/Documents/OSAttempt/user/user.ld -o /mnt/c/Users/Erik/Documents/OSAttempt/user.elf /mnt/c/Users/Erik/Documents/OSAttempt/user/user.c
 	i686-linux-gnu-objcopy -O binary --gap-fill 0x00 /mnt/c/Users/Erik/Documents/OSAttempt/user.elf /mnt/c/Users/Erik/Documents/OSAttempt/user.flat
 	cd /mnt/c/Users/Erik/Documents/OSAttempt && i686-linux-gnu-objcopy -I binary -O elf32-i386 -B i386 user.flat user_bin.o
 

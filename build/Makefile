@@ -130,6 +130,19 @@ user_binary/fast:
 .PHONY : user_binary/fast
 
 #=============================================================================
+# Target rules for targets named user_shell_binary
+
+# Build rule for target.
+user_shell_binary: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 user_shell_binary
+.PHONY : user_shell_binary
+
+# fast build rule for target.
+user_shell_binary/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/user_shell_binary.dir/build.make CMakeFiles/user_shell_binary.dir/build
+.PHONY : user_shell_binary/fast
+
+#=============================================================================
 # Target rules for targets named kernel.elf
 
 # Build rule for target.
@@ -142,229 +155,229 @@ kernel.elf/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/build
 .PHONY : kernel.elf/fast
 
-Shell.o: Shell.c.o
-.PHONY : Shell.o
+drivers/kbd_driver.o: drivers/kbd_driver.c.o
+.PHONY : drivers/kbd_driver.o
 
 # target to build an object file
-Shell.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/Shell.c.o
-.PHONY : Shell.c.o
+drivers/kbd_driver.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o
+.PHONY : drivers/kbd_driver.c.o
 
-Shell.i: Shell.c.i
-.PHONY : Shell.i
+drivers/kbd_driver.i: drivers/kbd_driver.c.i
+.PHONY : drivers/kbd_driver.i
 
 # target to preprocess a source file
-Shell.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/Shell.c.i
-.PHONY : Shell.c.i
+drivers/kbd_driver.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.i
+.PHONY : drivers/kbd_driver.c.i
 
-Shell.s: Shell.c.s
-.PHONY : Shell.s
+drivers/kbd_driver.s: drivers/kbd_driver.c.s
+.PHONY : drivers/kbd_driver.s
 
 # target to generate assembly for a file
-Shell.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/Shell.c.s
-.PHONY : Shell.c.s
+drivers/kbd_driver.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.s
+.PHONY : drivers/kbd_driver.c.s
 
-boot.o: boot.asm.o
-.PHONY : boot.o
-
-# target to build an object file
-boot.asm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/boot.asm.o
-.PHONY : boot.asm.o
-
-easyfs.o: easyfs.c.o
-.PHONY : easyfs.o
+fs/easyfs.o: fs/easyfs.c.o
+.PHONY : fs/easyfs.o
 
 # target to build an object file
-easyfs.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/easyfs.c.o
-.PHONY : easyfs.c.o
+fs/easyfs.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/fs/easyfs.c.o
+.PHONY : fs/easyfs.c.o
 
-easyfs.i: easyfs.c.i
-.PHONY : easyfs.i
+fs/easyfs.i: fs/easyfs.c.i
+.PHONY : fs/easyfs.i
 
 # target to preprocess a source file
-easyfs.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/easyfs.c.i
-.PHONY : easyfs.c.i
+fs/easyfs.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/fs/easyfs.c.i
+.PHONY : fs/easyfs.c.i
 
-easyfs.s: easyfs.c.s
-.PHONY : easyfs.s
+fs/easyfs.s: fs/easyfs.c.s
+.PHONY : fs/easyfs.s
 
 # target to generate assembly for a file
-easyfs.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/easyfs.c.s
-.PHONY : easyfs.c.s
+fs/easyfs.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/fs/easyfs.c.s
+.PHONY : fs/easyfs.c.s
 
-ed.o: ed.c.o
-.PHONY : ed.o
+fs/ed.o: fs/ed.c.o
+.PHONY : fs/ed.o
 
 # target to build an object file
-ed.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/ed.c.o
-.PHONY : ed.c.o
+fs/ed.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/fs/ed.c.o
+.PHONY : fs/ed.c.o
 
-ed.i: ed.c.i
-.PHONY : ed.i
+fs/ed.i: fs/ed.c.i
+.PHONY : fs/ed.i
 
 # target to preprocess a source file
-ed.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/ed.c.i
-.PHONY : ed.c.i
+fs/ed.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/fs/ed.c.i
+.PHONY : fs/ed.c.i
 
-ed.s: ed.c.s
-.PHONY : ed.s
+fs/ed.s: fs/ed.c.s
+.PHONY : fs/ed.s
 
 # target to generate assembly for a file
-ed.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/ed.c.s
-.PHONY : ed.c.s
+fs/ed.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/fs/ed.c.s
+.PHONY : fs/ed.c.s
 
-kbd_driver.o: kbd_driver.c.o
-.PHONY : kbd_driver.o
+kernel/Shell.o: kernel/Shell.c.o
+.PHONY : kernel/Shell.o
 
 # target to build an object file
-kbd_driver.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kbd_driver.c.o
-.PHONY : kbd_driver.c.o
+kernel/Shell.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/Shell.c.o
+.PHONY : kernel/Shell.c.o
 
-kbd_driver.i: kbd_driver.c.i
-.PHONY : kbd_driver.i
+kernel/Shell.i: kernel/Shell.c.i
+.PHONY : kernel/Shell.i
 
 # target to preprocess a source file
-kbd_driver.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kbd_driver.c.i
-.PHONY : kbd_driver.c.i
+kernel/Shell.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/Shell.c.i
+.PHONY : kernel/Shell.c.i
 
-kbd_driver.s: kbd_driver.c.s
-.PHONY : kbd_driver.s
+kernel/Shell.s: kernel/Shell.c.s
+.PHONY : kernel/Shell.s
 
 # target to generate assembly for a file
-kbd_driver.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kbd_driver.c.s
-.PHONY : kbd_driver.c.s
+kernel/Shell.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/Shell.c.s
+.PHONY : kernel/Shell.c.s
 
-kernel.o: kernel.c.o
-.PHONY : kernel.o
+kernel/boot.o: kernel/boot.asm.o
+.PHONY : kernel/boot.o
 
 # target to build an object file
-kernel.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel.c.o
-.PHONY : kernel.c.o
+kernel/boot.asm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/boot.asm.o
+.PHONY : kernel/boot.asm.o
 
-kernel.i: kernel.c.i
-.PHONY : kernel.i
-
-# target to preprocess a source file
-kernel.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel.c.i
-.PHONY : kernel.c.i
-
-kernel.s: kernel.c.s
-.PHONY : kernel.s
-
-# target to generate assembly for a file
-kernel.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel.c.s
-.PHONY : kernel.c.s
-
-kprintf.o: kprintf.c.o
-.PHONY : kprintf.o
+kernel/kernel.o: kernel/kernel.c.o
+.PHONY : kernel/kernel.o
 
 # target to build an object file
-kprintf.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kprintf.c.o
-.PHONY : kprintf.c.o
+kernel/kernel.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/kernel.c.o
+.PHONY : kernel/kernel.c.o
 
-kprintf.i: kprintf.c.i
-.PHONY : kprintf.i
+kernel/kernel.i: kernel/kernel.c.i
+.PHONY : kernel/kernel.i
 
 # target to preprocess a source file
-kprintf.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kprintf.c.i
-.PHONY : kprintf.c.i
+kernel/kernel.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/kernel.c.i
+.PHONY : kernel/kernel.c.i
 
-kprintf.s: kprintf.c.s
-.PHONY : kprintf.s
+kernel/kernel.s: kernel/kernel.c.s
+.PHONY : kernel/kernel.s
 
 # target to generate assembly for a file
-kprintf.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kprintf.c.s
-.PHONY : kprintf.c.s
+kernel/kernel.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/kernel.c.s
+.PHONY : kernel/kernel.c.s
 
-mm.o: mm.c.o
-.PHONY : mm.o
+kernel/kprintf.o: kernel/kprintf.c.o
+.PHONY : kernel/kprintf.o
 
 # target to build an object file
-mm.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/mm.c.o
-.PHONY : mm.c.o
+kernel/kprintf.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o
+.PHONY : kernel/kprintf.c.o
 
-mm.i: mm.c.i
-.PHONY : mm.i
+kernel/kprintf.i: kernel/kprintf.c.i
+.PHONY : kernel/kprintf.i
 
 # target to preprocess a source file
-mm.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/mm.c.i
-.PHONY : mm.c.i
+kernel/kprintf.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/kprintf.c.i
+.PHONY : kernel/kprintf.c.i
 
-mm.s: mm.c.s
-.PHONY : mm.s
+kernel/kprintf.s: kernel/kprintf.c.s
+.PHONY : kernel/kprintf.s
 
 # target to generate assembly for a file
-mm.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/mm.c.s
-.PHONY : mm.c.s
+kernel/kprintf.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/kprintf.c.s
+.PHONY : kernel/kprintf.c.s
 
-string.o: string.c.o
-.PHONY : string.o
+kernel/mm.o: kernel/mm.c.o
+.PHONY : kernel/mm.o
 
 # target to build an object file
-string.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/string.c.o
-.PHONY : string.c.o
+kernel/mm.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/mm.c.o
+.PHONY : kernel/mm.c.o
 
-string.i: string.c.i
-.PHONY : string.i
+kernel/mm.i: kernel/mm.c.i
+.PHONY : kernel/mm.i
 
 # target to preprocess a source file
-string.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/string.c.i
-.PHONY : string.c.i
+kernel/mm.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/mm.c.i
+.PHONY : kernel/mm.c.i
 
-string.s: string.c.s
-.PHONY : string.s
+kernel/mm.s: kernel/mm.c.s
+.PHONY : kernel/mm.s
 
 # target to generate assembly for a file
-string.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/string.c.s
-.PHONY : string.c.s
+kernel/mm.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/mm.c.s
+.PHONY : kernel/mm.c.s
 
-time.o: time.c.o
-.PHONY : time.o
+kernel/string.o: kernel/string.c.o
+.PHONY : kernel/string.o
 
 # target to build an object file
-time.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/time.c.o
-.PHONY : time.c.o
+kernel/string.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/string.c.o
+.PHONY : kernel/string.c.o
 
-time.i: time.c.i
-.PHONY : time.i
+kernel/string.i: kernel/string.c.i
+.PHONY : kernel/string.i
 
 # target to preprocess a source file
-time.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/time.c.i
-.PHONY : time.c.i
+kernel/string.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/string.c.i
+.PHONY : kernel/string.c.i
 
-time.s: time.c.s
-.PHONY : time.s
+kernel/string.s: kernel/string.c.s
+.PHONY : kernel/string.s
 
 # target to generate assembly for a file
-time.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/time.c.s
-.PHONY : time.c.s
+kernel/string.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/string.c.s
+.PHONY : kernel/string.c.s
+
+kernel/time.o: kernel/time.c.o
+.PHONY : kernel/time.o
+
+# target to build an object file
+kernel/time.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/time.c.o
+.PHONY : kernel/time.c.o
+
+kernel/time.i: kernel/time.c.i
+.PHONY : kernel/time.i
+
+# target to preprocess a source file
+kernel/time.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/time.c.i
+.PHONY : kernel/time.c.i
+
+kernel/time.s: kernel/time.c.s
+.PHONY : kernel/time.s
+
+# target to generate assembly for a file
+kernel/time.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/kernel/time.c.s
+.PHONY : kernel/time.c.s
 
 # Help Target
 help:
@@ -375,35 +388,36 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... user_binary"
+	@echo "... user_shell_binary"
 	@echo "... kernel.elf"
-	@echo "... Shell.o"
-	@echo "... Shell.i"
-	@echo "... Shell.s"
-	@echo "... boot.o"
-	@echo "... easyfs.o"
-	@echo "... easyfs.i"
-	@echo "... easyfs.s"
-	@echo "... ed.o"
-	@echo "... ed.i"
-	@echo "... ed.s"
-	@echo "... kbd_driver.o"
-	@echo "... kbd_driver.i"
-	@echo "... kbd_driver.s"
-	@echo "... kernel.o"
-	@echo "... kernel.i"
-	@echo "... kernel.s"
-	@echo "... kprintf.o"
-	@echo "... kprintf.i"
-	@echo "... kprintf.s"
-	@echo "... mm.o"
-	@echo "... mm.i"
-	@echo "... mm.s"
-	@echo "... string.o"
-	@echo "... string.i"
-	@echo "... string.s"
-	@echo "... time.o"
-	@echo "... time.i"
-	@echo "... time.s"
+	@echo "... drivers/kbd_driver.o"
+	@echo "... drivers/kbd_driver.i"
+	@echo "... drivers/kbd_driver.s"
+	@echo "... fs/easyfs.o"
+	@echo "... fs/easyfs.i"
+	@echo "... fs/easyfs.s"
+	@echo "... fs/ed.o"
+	@echo "... fs/ed.i"
+	@echo "... fs/ed.s"
+	@echo "... kernel/Shell.o"
+	@echo "... kernel/Shell.i"
+	@echo "... kernel/Shell.s"
+	@echo "... kernel/boot.o"
+	@echo "... kernel/kernel.o"
+	@echo "... kernel/kernel.i"
+	@echo "... kernel/kernel.s"
+	@echo "... kernel/kprintf.o"
+	@echo "... kernel/kprintf.i"
+	@echo "... kernel/kprintf.s"
+	@echo "... kernel/mm.o"
+	@echo "... kernel/mm.i"
+	@echo "... kernel/mm.s"
+	@echo "... kernel/string.o"
+	@echo "... kernel/string.i"
+	@echo "... kernel/string.s"
+	@echo "... kernel/time.o"
+	@echo "... kernel/time.i"
+	@echo "... kernel/time.s"
 .PHONY : help
 
 

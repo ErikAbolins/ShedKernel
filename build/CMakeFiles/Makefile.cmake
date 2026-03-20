@@ -53,5 +53,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/user_binary.dir/DependInfo.cmake"
+  "CMakeFiles/user_shell_binary.dir/DependInfo.cmake"
   "CMakeFiles/kernel.elf.dir/DependInfo.cmake"
   )

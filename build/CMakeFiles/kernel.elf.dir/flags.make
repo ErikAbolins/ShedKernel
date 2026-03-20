@@ -5,13 +5,13 @@
 # compile C with i686-linux-gnu-gcc
 ASM_NASM_DEFINES = 
 
-ASM_NASM_INCLUDES = 
+ASM_NASM_INCLUDES = -I/mnt/c/Users/Erik/Documents/OSAttempt/kernel -I/mnt/c/Users/Erik/Documents/OSAttempt/drivers -I/mnt/c/Users/Erik/Documents/OSAttempt/fs -I/mnt/c/Users/Erik/Documents/OSAttempt/user
 
 ASM_NASM_FLAGS = 
 
 C_DEFINES = 
 
-C_INCLUDES = 
+C_INCLUDES = -I/mnt/c/Users/Erik/Documents/OSAttempt/kernel -I/mnt/c/Users/Erik/Documents/OSAttempt/drivers -I/mnt/c/Users/Erik/Documents/OSAttempt/fs -I/mnt/c/Users/Erik/Documents/OSAttempt/user
 
 C_FLAGS = -ffreestanding -O2 -nostdlib
 

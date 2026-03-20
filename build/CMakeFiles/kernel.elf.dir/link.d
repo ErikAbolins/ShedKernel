@@ -1,37 +1,40 @@
 kernel.elf: \
-  /mnt/c/Users/Erik/Documents/OSAttempt/linker.ld \
+  /mnt/c/Users/Erik/Documents/OSAttempt/linker/linker.ld \
   /mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o \
-  CMakeFiles/kernel.elf.dir/boot.asm.o \
-  CMakeFiles/kernel.elf.dir/kernel.c.o \
-  CMakeFiles/kernel.elf.dir/kbd_driver.c.o \
-  CMakeFiles/kernel.elf.dir/mm.c.o \
-  CMakeFiles/kernel.elf.dir/time.c.o \
-  CMakeFiles/kernel.elf.dir/kprintf.c.o \
-  CMakeFiles/kernel.elf.dir/Shell.c.o \
-  CMakeFiles/kernel.elf.dir/string.c.o \
-  CMakeFiles/kernel.elf.dir/easyfs.c.o \
-  CMakeFiles/kernel.elf.dir/ed.c.o
+  /mnt/c/Users/Erik/Documents/OSAttempt/user_shell_bin.o \
+  CMakeFiles/kernel.elf.dir/kernel/boot.asm.o \
+  CMakeFiles/kernel.elf.dir/kernel/kernel.c.o \
+  CMakeFiles/kernel.elf.dir/kernel/mm.c.o \
+  CMakeFiles/kernel.elf.dir/kernel/time.c.o \
+  CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o \
+  CMakeFiles/kernel.elf.dir/kernel/string.c.o \
+  CMakeFiles/kernel.elf.dir/kernel/Shell.c.o \
+  CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o \
+  CMakeFiles/kernel.elf.dir/fs/easyfs.c.o \
+  CMakeFiles/kernel.elf.dir/fs/ed.c.o
 
-/mnt/c/Users/Erik/Documents/OSAttempt/linker.ld:
+/mnt/c/Users/Erik/Documents/OSAttempt/linker/linker.ld:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o:
 
-CMakeFiles/kernel.elf.dir/boot.asm.o:
+/mnt/c/Users/Erik/Documents/OSAttempt/user_shell_bin.o:
 
-CMakeFiles/kernel.elf.dir/kernel.c.o:
+CMakeFiles/kernel.elf.dir/kernel/boot.asm.o:
 
-CMakeFiles/kernel.elf.dir/kbd_driver.c.o:
+CMakeFiles/kernel.elf.dir/kernel/kernel.c.o:
 
-CMakeFiles/kernel.elf.dir/mm.c.o:
+CMakeFiles/kernel.elf.dir/kernel/mm.c.o:
 
-CMakeFiles/kernel.elf.dir/time.c.o:
+CMakeFiles/kernel.elf.dir/kernel/time.c.o:
 
-CMakeFiles/kernel.elf.dir/kprintf.c.o:
+CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o:
 
-CMakeFiles/kernel.elf.dir/Shell.c.o:
+CMakeFiles/kernel.elf.dir/kernel/string.c.o:
 
-CMakeFiles/kernel.elf.dir/string.c.o:
+CMakeFiles/kernel.elf.dir/kernel/Shell.c.o:
 
-CMakeFiles/kernel.elf.dir/easyfs.c.o:
+CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o:
 
-CMakeFiles/kernel.elf.dir/ed.c.o:
+CMakeFiles/kernel.elf.dir/fs/easyfs.c.o:
+
+CMakeFiles/kernel.elf.dir/fs/ed.c.o:
