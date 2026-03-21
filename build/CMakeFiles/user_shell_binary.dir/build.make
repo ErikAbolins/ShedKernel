@@ -69,10 +69,11 @@ include CMakeFiles/user_shell_binary.dir/progress.make
 CMakeFiles/user_shell_binary: /mnt/c/Users/Erik/Documents/OSAttempt/user_shell_bin.o
 
 /mnt/c/Users/Erik/Documents/OSAttempt/user_shell_bin.o: /mnt/c/Users/Erik/Documents/OSAttempt/user/user_shell.c
+/mnt/c/Users/Erik/Documents/OSAttempt/user_shell_bin.o: /mnt/c/Users/Erik/Documents/OSAttempt/user/syscalls.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building userspace shell binary"
-	i686-linux-gnu-gcc -m32 -nostdlib -nostdinc -ffreestanding -fno-pic -fno-pie -no-pie -nostartfiles -T /mnt/c/Users/Erik/Documents/OSAttempt/user/user_shell.ld -o /mnt/c/Users/Erik/Documents/OSAttempt/user_shell.elf /mnt/c/Users/Erik/Documents/OSAttempt/user/user_shell.c
-	i686-linux-gnu-objcopy -O binary --gap-fill 0x00 /mnt/c/Users/Erik/Documents/OSAttempt/user_shell.elf /mnt/c/Users/Erik/Documents/OSAttempt/user_shell.flat
-	cd /mnt/c/Users/Erik/Documents/OSAttempt && i686-linux-gnu-objcopy -I binary -O elf32-i386 -B i386 user_shell.flat user_shell_bin.o
+	/home/erik/opt/cross/bin/i686-elf-gcc -m32 -ffreestanding -nostartfiles -fno-pic -fno-pie -no-pie -isystem /home/erik/opt/cross/i686-elf/include -T /mnt/c/Users/Erik/Documents/OSAttempt/user/user_shell.ld -o /mnt/c/Users/Erik/Documents/OSAttempt/user_shell.elf /mnt/c/Users/Erik/Documents/OSAttempt/user/user_shell.c /mnt/c/Users/Erik/Documents/OSAttempt/user/syscalls.c -L/home/erik/opt/cross/i686-elf/lib -lc -lm
+	/home/erik/opt/cross/bin/i686-elf-objcopy -O binary --gap-fill 0x00 /mnt/c/Users/Erik/Documents/OSAttempt/user_shell.elf /mnt/c/Users/Erik/Documents/OSAttempt/user_shell.flat
+	cd /mnt/c/Users/Erik/Documents/OSAttempt && /home/erik/opt/cross/bin/i686-elf-objcopy -I binary -O elf32-i386 -B i386 user_shell.flat user_shell_bin.o
 
 CMakeFiles/user_shell_binary.dir/codegen:
 .PHONY : CMakeFiles/user_shell_binary.dir/codegen

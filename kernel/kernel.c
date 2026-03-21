@@ -36,7 +36,6 @@ typedef struct {
 
 typedef unsigned char u8;
 typedef unsigned short u16;
-typedef unsigned int u32;
 
 
 extern char read_port(unsigned short port);
@@ -49,6 +48,11 @@ extern char _binary_user_flat_start[];
 extern char _binary_user_flat_end[];
 extern char _binary_user_shell_flat_start[];
 extern char _binary_user_shell_flat_end[];
+extern char _binary_user_editor_flat_start[];
+extern char _binary_user_editor_flat_end[];
+
+void jump_to_editor(void);
+void jump_to_shell(void);
 extern char *vidptr;
 extern unsigned int current_loc;
 u32 kernel_esp_save = 0;
@@ -307,8 +311,44 @@ u32 syscall_dispatch(u32 syscall_num, u32 arg1, u32 arg2, u32 arg3) {
             }
             return 0;
         case 11: clear_screen(); return 0;
+        case 13: jump_to_editor(); return 0;
+        case 14: kvga_write_char((int)arg1, (int)arg2, (char)(arg3 & 0xFF), (uint8_t)(arg3 >> 8)); return 0;
+        case 15: kvga_set_cursor((int)arg1, (int)arg2); return 0;
+        case 16: kvga_clear_to_eol((int)arg1, (int)arg2); return 0;
+        case 12: {
+            /* _sbrk: bump a per-process heap pointer, mapping new pages as needed */
+            static u32 user_heap_ptr = 0xE0000000;
+            u32 old = user_heap_ptr;
+            u32 incr = arg1;
+            /* map a new page if we've crossed a boundary */
+            u32 new_ptr = old + incr;
+            for (u32 addr = old & ~0xFFF; addr < new_ptr; addr += 0x1000) {
+                u32 phys = alloc_page_frame();
+                map_user_page(addr, phys);
+            }
+            user_heap_ptr = new_ptr;
+            return old;
+        }
         default: kprintf("unknown syscall %d\n", syscall_num); return 0xFFFFFFFF;
     }
+}
+
+void jump_to_editor(void) {
+    asm volatile("mov %%esp, %0" : "=r"(kernel_esp_save));
+    asm volatile(
+        "mov $0x2B, %%ax\n"
+        "mov %%ax, %%ds\n"
+        "mov %%ax, %%es\n"
+        "mov %%ax, %%fs\n"
+        "mov %%ax, %%gs\n"
+        "push $0x33\n"
+        "push $0x71000FF0\n"
+        "pushf\n"
+        "push $0x23\n"
+        "push $0x70000000\n"
+        "iret\n"
+        : : : "eax"
+    );
 }
 
 void jump_to_shell(void) {
@@ -349,21 +389,36 @@ void kernel_main(void) {
     while (src < _binary_user_flat_end)
         user_code[i++] = *src++;
 
-    // map shell binary at 0xC0000000 (4 pages for code+BSS)
-    u32 user_shell_phys  = alloc_page_frame();
-    u32 user_shell_phys2 = alloc_page_frame();
-    u32 user_shell_phys3 = alloc_page_frame();
-    u32 user_shell_phys4 = alloc_page_frame();
-    u32 user_shell_stack = alloc_page_frame();
-    map_user_page(0xC0000000, user_shell_phys);
-    map_user_page(0xC0001000, user_shell_phys2);
-    map_user_page(0xC0002000, user_shell_phys3);
-    map_user_page(0xC0003000, user_shell_phys4);
-    map_user_page(0xD0000000, user_shell_stack);
+    // shared memory page for IPC (filename passing etc)
+    u32 shared_phys = alloc_page_frame();
+    map_user_page(0xF0000000, shared_phys);
+    u8 *shared = (u8*)0xF0000000;
+    for (int s = 0; s < 4096; s++) shared[s] = 0;
+
+    // map editor binary at 0x70000000 (12 pages)
+    for (int p = 0; p < 12; p++)
+        map_user_page(0x70000000 + p * 0x1000, alloc_page_frame());
+    map_user_page(0x71000000, alloc_page_frame()); // stack
+
+    // zero editor pages
+    u8 *editor_pages = (u8*)0x70000000;
+    for (int e = 0; e < 12 * 4096; e++) editor_pages[e] = 0;
+
+    // copy editor binary in
+    u8 *editor_code = (u8*)0x70000000;
+    char *editor_src = _binary_user_editor_flat_start;
+    int ei = 0;
+    while (editor_src < _binary_user_editor_flat_end)
+        editor_code[ei++] = *editor_src++;
+
+    // map shell binary at 0xC0000000 (12 pages)
+    for (int p = 0; p < 12; p++)
+        map_user_page(0xC0000000 + p * 0x1000, alloc_page_frame());
+    map_user_page(0xD0000000, alloc_page_frame()); // stack
 
     // zero all shell pages (initialises BSS)
     u8 *shell_pages = (u8*)0xC0000000;
-    for (int k = 0; k < 4 * 4096; k++)
+    for (int k = 0; k < 12 * 4096; k++)
         shell_pages[k] = 0;
 
     // copy shell binary in

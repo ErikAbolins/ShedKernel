@@ -2,14 +2,13 @@
 #define MM_H
 
 
+#include <stdint.h>
+#include <stddef.h>
+#include <stdbool.h>
+
 #define NULL_POINTER            ((void*)0)
 #define DYNAMIC_MEM_TOTAL_SIZE  (1024U * 1024U)
-typedef unsigned int size_t;
-typedef unsigned char  uint8_t;
-typedef unsigned int   uint32_t;
 typedef unsigned int u32;
-#define true  1
-#define false 0
 
 
 typedef struct dynamic_mem_node {

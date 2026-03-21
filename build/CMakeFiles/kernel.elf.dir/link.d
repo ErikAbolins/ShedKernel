@@ -2,6 +2,7 @@ kernel.elf: \
   /mnt/c/Users/Erik/Documents/OSAttempt/linker/linker.ld \
   /mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o \
   /mnt/c/Users/Erik/Documents/OSAttempt/user_shell_bin.o \
+  /mnt/c/Users/Erik/Documents/OSAttempt/user_editor_bin.o \
   CMakeFiles/kernel.elf.dir/kernel/boot.asm.o \
   CMakeFiles/kernel.elf.dir/kernel/kernel.c.o \
   CMakeFiles/kernel.elf.dir/kernel/mm.c.o \
@@ -18,6 +19,8 @@ kernel.elf: \
 /mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/user_shell_bin.o:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/user_editor_bin.o:
 
 CMakeFiles/kernel.elf.dir/kernel/boot.asm.o:
 

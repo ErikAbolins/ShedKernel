@@ -54,6 +54,46 @@ static inline void sys_clear() {
     asm volatile("mov $11, %%eax\n int $0x80\n" : : : "eax");
 }
 
+static inline void sys_exec_editor(const char *filename) {
+    /* write filename into shared memory then jump to editor */
+    char *shared = (char*)0xF0000000;
+    const char *s = filename;
+    int i = 0;
+    while (*s) shared[i++] = *s++;
+    shared[i] = '\0';
+    asm volatile("mov $13, %%eax\n int $0x80\n" : : : "eax");
+}
+
+/* shared memory — both editor and shell can see this */
+#define SHED_SHARED_MEM ((char*)0xF0000000)
+
+/* VGA attribute bytes */
+#define VGA_ATTR_NORMAL   0x07  /* white on black */
+#define VGA_ATTR_INVERTED 0x70  /* black on white */
+#define VGA_ATTR_GREEN    0x0A  /* bright green on black */
+#define VGA_ROWS 25
+#define VGA_COLS 80
+
+static inline void sys_vga_write_char(int row, int col, char c, unsigned char attr) {
+    unsigned int packed = ((unsigned int)attr << 8) | (unsigned char)c;
+    asm volatile("mov $14, %%eax\n int $0x80\n"
+        : : "b"(row), "c"(col), "d"(packed) : "eax");
+}
+
+static inline void sys_vga_set_cursor(int row, int col) {
+    asm volatile("mov $15, %%eax\n int $0x80\n"
+        : : "b"(row), "c"(col) : "eax");
+}
+
+static inline void sys_vga_clear_to_eol(int row, int col) {
+    asm volatile("mov $16, %%eax\n int $0x80\n"
+        : : "b"(row), "c"(col) : "eax");
+}
+
+static inline void sys_vga_write_str(int row, int col, const char *s, unsigned char attr) {
+    while (*s) sys_vga_write_char(row, col++, *s++, attr);
+}
+
 
 static inline void u_heap_reset() {
     heap_pos = 0;

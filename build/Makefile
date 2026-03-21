@@ -143,6 +143,19 @@ user_shell_binary/fast:
 .PHONY : user_shell_binary/fast
 
 #=============================================================================
+# Target rules for targets named user_editor_binary
+
+# Build rule for target.
+user_editor_binary: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 user_editor_binary
+.PHONY : user_editor_binary
+
+# fast build rule for target.
+user_editor_binary/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/user_editor_binary.dir/build.make CMakeFiles/user_editor_binary.dir/build
+.PHONY : user_editor_binary/fast
+
+#=============================================================================
 # Target rules for targets named kernel.elf
 
 # Build rule for target.
@@ -388,6 +401,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... user_binary"
+	@echo "... user_editor_binary"
 	@echo "... user_shell_binary"
 	@echo "... kernel.elf"
 	@echo "... drivers/kbd_driver.o"

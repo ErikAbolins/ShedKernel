@@ -1,5 +1,6 @@
 /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/user_binary.dir
 /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/user_shell_binary.dir
+/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/user_editor_binary.dir
 /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir
 /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/edit_cache.dir
 /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/rebuild_cache.dir

@@ -1,5 +1,7 @@
 # Hashes of file build rules.
-cfc956e348feeb7977f7043fcc3d003a /mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o
-d05f4c3bcfe9dbfe9365aaf4ec10496d /mnt/c/Users/Erik/Documents/OSAttempt/user_shell_bin.o
+c13cd941dd28772aad018c508d8bce23 /mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o
+be2599598ff76b6ae0326e1e3ee1c292 /mnt/c/Users/Erik/Documents/OSAttempt/user_editor_bin.o
+0b92040b5199b002df898ef7fe5e7211 /mnt/c/Users/Erik/Documents/OSAttempt/user_shell_bin.o
 4423e9f17e2b6d651cf617ce1ebc2d6c CMakeFiles/user_binary
+4423e9f17e2b6d651cf617ce1ebc2d6c CMakeFiles/user_editor_binary
 4423e9f17e2b6d651cf617ce1ebc2d6c CMakeFiles/user_shell_binary

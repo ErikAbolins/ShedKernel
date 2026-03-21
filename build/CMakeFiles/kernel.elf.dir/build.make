@@ -82,127 +82,127 @@ CMakeFiles/kernel.elf.dir/kernel/kernel.c.o: CMakeFiles/kernel.elf.dir/flags.mak
 CMakeFiles/kernel.elf.dir/kernel/kernel.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kernel.c
 CMakeFiles/kernel.elf.dir/kernel/kernel.c.o: CMakeFiles/kernel.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/kernel.elf.dir/kernel/kernel.c.o"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/kernel/kernel.c.o -MF CMakeFiles/kernel.elf.dir/kernel/kernel.c.o.d -o CMakeFiles/kernel.elf.dir/kernel/kernel.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kernel.c
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/kernel/kernel.c.o -MF CMakeFiles/kernel.elf.dir/kernel/kernel.c.o.d -o CMakeFiles/kernel.elf.dir/kernel/kernel.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kernel.c
 
 CMakeFiles/kernel.elf.dir/kernel/kernel.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/kernel.elf.dir/kernel/kernel.c.i"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kernel.c > CMakeFiles/kernel.elf.dir/kernel/kernel.c.i
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kernel.c > CMakeFiles/kernel.elf.dir/kernel/kernel.c.i
 
 CMakeFiles/kernel.elf.dir/kernel/kernel.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/kernel.elf.dir/kernel/kernel.c.s"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kernel.c -o CMakeFiles/kernel.elf.dir/kernel/kernel.c.s
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kernel.c -o CMakeFiles/kernel.elf.dir/kernel/kernel.c.s
 
 CMakeFiles/kernel.elf.dir/kernel/mm.c.o: CMakeFiles/kernel.elf.dir/flags.make
 CMakeFiles/kernel.elf.dir/kernel/mm.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.c
 CMakeFiles/kernel.elf.dir/kernel/mm.c.o: CMakeFiles/kernel.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/kernel.elf.dir/kernel/mm.c.o"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/kernel/mm.c.o -MF CMakeFiles/kernel.elf.dir/kernel/mm.c.o.d -o CMakeFiles/kernel.elf.dir/kernel/mm.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.c
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/kernel/mm.c.o -MF CMakeFiles/kernel.elf.dir/kernel/mm.c.o.d -o CMakeFiles/kernel.elf.dir/kernel/mm.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.c
 
 CMakeFiles/kernel.elf.dir/kernel/mm.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/kernel.elf.dir/kernel/mm.c.i"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.c > CMakeFiles/kernel.elf.dir/kernel/mm.c.i
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.c > CMakeFiles/kernel.elf.dir/kernel/mm.c.i
 
 CMakeFiles/kernel.elf.dir/kernel/mm.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/kernel.elf.dir/kernel/mm.c.s"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.c -o CMakeFiles/kernel.elf.dir/kernel/mm.c.s
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.c -o CMakeFiles/kernel.elf.dir/kernel/mm.c.s
 
 CMakeFiles/kernel.elf.dir/kernel/time.c.o: CMakeFiles/kernel.elf.dir/flags.make
 CMakeFiles/kernel.elf.dir/kernel/time.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kernel/time.c
 CMakeFiles/kernel.elf.dir/kernel/time.c.o: CMakeFiles/kernel.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/kernel.elf.dir/kernel/time.c.o"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/kernel/time.c.o -MF CMakeFiles/kernel.elf.dir/kernel/time.c.o.d -o CMakeFiles/kernel.elf.dir/kernel/time.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/kernel/time.c
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/kernel/time.c.o -MF CMakeFiles/kernel.elf.dir/kernel/time.c.o.d -o CMakeFiles/kernel.elf.dir/kernel/time.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/kernel/time.c
 
 CMakeFiles/kernel.elf.dir/kernel/time.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/kernel.elf.dir/kernel/time.c.i"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/kernel/time.c > CMakeFiles/kernel.elf.dir/kernel/time.c.i
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/kernel/time.c > CMakeFiles/kernel.elf.dir/kernel/time.c.i
 
 CMakeFiles/kernel.elf.dir/kernel/time.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/kernel.elf.dir/kernel/time.c.s"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/kernel/time.c -o CMakeFiles/kernel.elf.dir/kernel/time.c.s
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/kernel/time.c -o CMakeFiles/kernel.elf.dir/kernel/time.c.s
 
 CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o: CMakeFiles/kernel.elf.dir/flags.make
 CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.c
 CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o: CMakeFiles/kernel.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o -MF CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o.d -o CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.c
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o -MF CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o.d -o CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.c
 
 CMakeFiles/kernel.elf.dir/kernel/kprintf.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/kernel.elf.dir/kernel/kprintf.c.i"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.c > CMakeFiles/kernel.elf.dir/kernel/kprintf.c.i
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.c > CMakeFiles/kernel.elf.dir/kernel/kprintf.c.i
 
 CMakeFiles/kernel.elf.dir/kernel/kprintf.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/kernel.elf.dir/kernel/kprintf.c.s"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.c -o CMakeFiles/kernel.elf.dir/kernel/kprintf.c.s
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.c -o CMakeFiles/kernel.elf.dir/kernel/kprintf.c.s
 
 CMakeFiles/kernel.elf.dir/kernel/string.c.o: CMakeFiles/kernel.elf.dir/flags.make
 CMakeFiles/kernel.elf.dir/kernel/string.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.c
 CMakeFiles/kernel.elf.dir/kernel/string.c.o: CMakeFiles/kernel.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/kernel.elf.dir/kernel/string.c.o"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/kernel/string.c.o -MF CMakeFiles/kernel.elf.dir/kernel/string.c.o.d -o CMakeFiles/kernel.elf.dir/kernel/string.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.c
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/kernel/string.c.o -MF CMakeFiles/kernel.elf.dir/kernel/string.c.o.d -o CMakeFiles/kernel.elf.dir/kernel/string.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.c
 
 CMakeFiles/kernel.elf.dir/kernel/string.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/kernel.elf.dir/kernel/string.c.i"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.c > CMakeFiles/kernel.elf.dir/kernel/string.c.i
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.c > CMakeFiles/kernel.elf.dir/kernel/string.c.i
 
 CMakeFiles/kernel.elf.dir/kernel/string.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/kernel.elf.dir/kernel/string.c.s"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.c -o CMakeFiles/kernel.elf.dir/kernel/string.c.s
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.c -o CMakeFiles/kernel.elf.dir/kernel/string.c.s
 
 CMakeFiles/kernel.elf.dir/kernel/Shell.c.o: CMakeFiles/kernel.elf.dir/flags.make
 CMakeFiles/kernel.elf.dir/kernel/Shell.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.c
 CMakeFiles/kernel.elf.dir/kernel/Shell.c.o: CMakeFiles/kernel.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/kernel.elf.dir/kernel/Shell.c.o"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/kernel/Shell.c.o -MF CMakeFiles/kernel.elf.dir/kernel/Shell.c.o.d -o CMakeFiles/kernel.elf.dir/kernel/Shell.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.c
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/kernel/Shell.c.o -MF CMakeFiles/kernel.elf.dir/kernel/Shell.c.o.d -o CMakeFiles/kernel.elf.dir/kernel/Shell.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.c
 
 CMakeFiles/kernel.elf.dir/kernel/Shell.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/kernel.elf.dir/kernel/Shell.c.i"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.c > CMakeFiles/kernel.elf.dir/kernel/Shell.c.i
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.c > CMakeFiles/kernel.elf.dir/kernel/Shell.c.i
 
 CMakeFiles/kernel.elf.dir/kernel/Shell.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/kernel.elf.dir/kernel/Shell.c.s"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.c -o CMakeFiles/kernel.elf.dir/kernel/Shell.c.s
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.c -o CMakeFiles/kernel.elf.dir/kernel/Shell.c.s
 
 CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o: CMakeFiles/kernel.elf.dir/flags.make
 CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.c
 CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o: CMakeFiles/kernel.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o -MF CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o.d -o CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.c
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o -MF CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o.d -o CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.c
 
 CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.i"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.c > CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.i
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.c > CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.i
 
 CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.s"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.c -o CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.s
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.c -o CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.s
 
 CMakeFiles/kernel.elf.dir/fs/easyfs.c.o: CMakeFiles/kernel.elf.dir/flags.make
 CMakeFiles/kernel.elf.dir/fs/easyfs.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.c
 CMakeFiles/kernel.elf.dir/fs/easyfs.c.o: CMakeFiles/kernel.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/kernel.elf.dir/fs/easyfs.c.o"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/fs/easyfs.c.o -MF CMakeFiles/kernel.elf.dir/fs/easyfs.c.o.d -o CMakeFiles/kernel.elf.dir/fs/easyfs.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.c
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/fs/easyfs.c.o -MF CMakeFiles/kernel.elf.dir/fs/easyfs.c.o.d -o CMakeFiles/kernel.elf.dir/fs/easyfs.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.c
 
 CMakeFiles/kernel.elf.dir/fs/easyfs.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/kernel.elf.dir/fs/easyfs.c.i"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.c > CMakeFiles/kernel.elf.dir/fs/easyfs.c.i
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.c > CMakeFiles/kernel.elf.dir/fs/easyfs.c.i
 
 CMakeFiles/kernel.elf.dir/fs/easyfs.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/kernel.elf.dir/fs/easyfs.c.s"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.c -o CMakeFiles/kernel.elf.dir/fs/easyfs.c.s
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.c -o CMakeFiles/kernel.elf.dir/fs/easyfs.c.s
 
 CMakeFiles/kernel.elf.dir/fs/ed.c.o: CMakeFiles/kernel.elf.dir/flags.make
 CMakeFiles/kernel.elf.dir/fs/ed.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c
 CMakeFiles/kernel.elf.dir/fs/ed.c.o: CMakeFiles/kernel.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/kernel.elf.dir/fs/ed.c.o"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/fs/ed.c.o -MF CMakeFiles/kernel.elf.dir/fs/ed.c.o.d -o CMakeFiles/kernel.elf.dir/fs/ed.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/fs/ed.c.o -MF CMakeFiles/kernel.elf.dir/fs/ed.c.o.d -o CMakeFiles/kernel.elf.dir/fs/ed.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c
 
 CMakeFiles/kernel.elf.dir/fs/ed.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/kernel.elf.dir/fs/ed.c.i"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c > CMakeFiles/kernel.elf.dir/fs/ed.c.i
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c > CMakeFiles/kernel.elf.dir/fs/ed.c.i
 
 CMakeFiles/kernel.elf.dir/fs/ed.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/kernel.elf.dir/fs/ed.c.s"
-	i686-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c -o CMakeFiles/kernel.elf.dir/fs/ed.c.s
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c -o CMakeFiles/kernel.elf.dir/fs/ed.c.s
 
 # Object files for target kernel.elf
 kernel_elf_OBJECTS = \

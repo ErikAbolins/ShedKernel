@@ -11,7 +11,7 @@ extern u32 kernel_end;
 
 //Page frame allocation definitions
 #define PAGE_SIZE 4096
-#define PHYS_MEM_END 0x800000
+#define PHYS_MEM_END 0x2000000  /* 32MB */
 
 
 static uint8_t dynamic_mem_area[DYNAMIC_MEM_TOTAL_SIZE];

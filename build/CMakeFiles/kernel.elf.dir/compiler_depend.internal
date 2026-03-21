@@ -3,24 +3,33 @@
 
 CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.c
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdbool.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stddef.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint-gcc.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint.h
  /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.h
  /mnt/c/Users/Erik/Documents/OSAttempt/drivers/keyboard_map.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.h
 
 CMakeFiles/kernel.elf.dir/fs/easyfs.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.c
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdbool.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stddef.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint-gcc.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/fs_config.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/fs_types.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdbool.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h
 
 CMakeFiles/kernel.elf.dir/fs/ed.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdbool.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stddef.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint-gcc.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint.h
  /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.h
@@ -29,12 +38,13 @@ CMakeFiles/kernel.elf.dir/fs/ed.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdbool.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h
 
 CMakeFiles/kernel.elf.dir/kernel/Shell.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.c
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdbool.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stddef.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint-gcc.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint.h
  /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.h
@@ -44,12 +54,13 @@ CMakeFiles/kernel.elf.dir/kernel/Shell.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdbool.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h
 
 CMakeFiles/kernel.elf.dir/kernel/kernel.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kernel.c
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdbool.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stddef.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint-gcc.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint.h
  /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.h
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.h
@@ -59,23 +70,22 @@ CMakeFiles/kernel.elf.dir/kernel/kernel.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/time.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdbool.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h
 
 CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.c
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdarg.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint-gcc.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdarg.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h
 
 CMakeFiles/kernel.elf.dir/kernel/mm.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.c
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdbool.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stddef.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint-gcc.h
+ /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.h
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint-gcc.h
- /usr/lib/gcc-cross/i686-linux-gnu/14/include/stdint.h
 
 CMakeFiles/kernel.elf.dir/kernel/string.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.c
@@ -88,6 +98,7 @@ CMakeFiles/kernel.elf.dir/kernel/time.c.o
 kernel.elf
  /mnt/c/Users/Erik/Documents/OSAttempt/linker/linker.ld
  /mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o
+ /mnt/c/Users/Erik/Documents/OSAttempt/user_editor_bin.o
  /mnt/c/Users/Erik/Documents/OSAttempt/user_shell_bin.o
  /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o
  /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles/kernel.elf.dir/fs/easyfs.c.o
