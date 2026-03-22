@@ -1,30 +1,40 @@
+/*
+ * mm.c - Memory management
+ *
+ * Covers: physical page frame allocator, dynamic heap (best-fit
+ *         linked-list allocator), malloc / mem_free / realloc.
+ */
+
 #include "mm.h"
 #include "kprintf.h"
 #include <stdint.h>
 
-#define NULL_POINTER ((void*)0)
-#define DYNAMIC_MEM_NODE_SIZE sizeof(dynamic_mem_node_t) // 16 bytes
+#define NULL_POINTER        ((void*)0)
+#define DYNAMIC_MEM_NODE_SIZE   sizeof(dynamic_mem_node_t)
 
-typedef unsigned int   u32;
+#define PAGE_SIZE           4096
+#define PHYS_MEM_END        0x2000000   /* 32 MB */
+
+typedef unsigned int u32;
 
 extern u32 kernel_end;
 
-//Page frame allocation definitions
-#define PAGE_SIZE 4096
-#define PHYS_MEM_END 0x2000000  /* 32MB */
-
-
-static uint8_t dynamic_mem_area[DYNAMIC_MEM_TOTAL_SIZE];
+static uint8_t           dynamic_mem_area[DYNAMIC_MEM_TOTAL_SIZE];
 static dynamic_mem_node_t *dynamic_mem_start;
-static u32 next_free_page = 0;
+static u32               next_free_page = 0;
 
 
-void paging_alloc_init() {
+/* =========================================================
+ * Physical page allocator
+ * ========================================================= */
+
+void paging_alloc_init(void)
+{
     next_free_page = ((u32)&kernel_end + 0xFFF) & ~0xFFF;
 }
 
-
-u32 alloc_page_frame() {
+u32 alloc_page_frame(void)
+{
     if (next_free_page >= PHYS_MEM_END)
         return 0;
     u32 addr = next_free_page;
@@ -33,145 +43,141 @@ u32 alloc_page_frame() {
 }
 
 
-void init_dynamic_mem() {
-    dynamic_mem_start = (dynamic_mem_node_t *) dynamic_mem_area;
+/* =========================================================
+ * Dynamic heap
+ * ========================================================= */
+
+void init_dynamic_mem(void)
+{
+    dynamic_mem_start       = (dynamic_mem_node_t *)dynamic_mem_area;
     dynamic_mem_start->size = DYNAMIC_MEM_TOTAL_SIZE - DYNAMIC_MEM_NODE_SIZE;
     dynamic_mem_start->next = NULL_POINTER;
     dynamic_mem_start->prev = NULL_POINTER;
     dynamic_mem_start->used = false;
 }
 
-void *find_best_mem_block(dynamic_mem_node_t *dynamic_mem, size_t size) {
-    dynamic_mem_node_t *best_mem_block = NULL_POINTER;
-    uint32_t best_mem_block_size = DYNAMIC_MEM_TOTAL_SIZE + 1;
+static void *find_best_mem_block(dynamic_mem_node_t *heap, size_t size)
+{
+    dynamic_mem_node_t *best  = NULL_POINTER;
+    uint32_t            best_size = DYNAMIC_MEM_TOTAL_SIZE + 1;
+    dynamic_mem_node_t *cur   = heap;
 
-    dynamic_mem_node_t *current_mem_block = dynamic_mem;
-    while (current_mem_block) {
-        if (!current_mem_block->used &&
-            current_mem_block->size >= size &&
-            current_mem_block->size <= best_mem_block_size) {
-            best_mem_block = current_mem_block;
-            best_mem_block_size = current_mem_block->size;
-            }
-        current_mem_block = current_mem_block->next;
+    while (cur) {
+        if (!cur->used && cur->size >= size && cur->size <= best_size) {
+            best      = cur;
+            best_size = cur->size;
+        }
+        cur = cur->next;
     }
-    return best_mem_block;
+    return best;
 }
 
+void *malloc(size_t size)
+{
+    dynamic_mem_node_t *block = find_best_mem_block(dynamic_mem_start, size);
 
-void *malloc(size_t size) {
-
-    dynamic_mem_node_t *best_mem_block = (dynamic_mem_node_t *)find_best_mem_block(dynamic_mem_start, size);
-
-    if (best_mem_block == NULL_POINTER) {
+    if (block == NULL_POINTER)
         return NULL_POINTER;
+
+    if (block->size >= size + DYNAMIC_MEM_NODE_SIZE) {
+        /* Carve a new node out of the tail of this block */
+        dynamic_mem_node_t *new_node =
+            (dynamic_mem_node_t *)((uint8_t *)block + DYNAMIC_MEM_NODE_SIZE +
+                                   block->size - size - DYNAMIC_MEM_NODE_SIZE);
+
+        new_node->size = size;
+        new_node->used = true;
+        new_node->next = block->next;
+        new_node->prev = block;
+
+        if (block->next != NULL_POINTER)
+            block->next->prev = new_node;
+
+        block->next  = new_node;
+        block->size -= size + DYNAMIC_MEM_NODE_SIZE;
+
+        return (void *)((uint8_t *)new_node + DYNAMIC_MEM_NODE_SIZE);
     }
 
-    if (best_mem_block->size >= size + DYNAMIC_MEM_NODE_SIZE) {
-        dynamic_mem_node_t *mem_node_allocate = (dynamic_mem_node_t *)(((uint8_t *)best_mem_block) + DYNAMIC_MEM_NODE_SIZE + best_mem_block->size - size - DYNAMIC_MEM_NODE_SIZE);
-
-        mem_node_allocate->size = size;
-        mem_node_allocate->used = true;
-        mem_node_allocate->next = best_mem_block->next;
-        mem_node_allocate->prev = best_mem_block;
-
-        if (best_mem_block->next != NULL_POINTER)
-            best_mem_block->next->prev = mem_node_allocate;
-
-        best_mem_block->next = mem_node_allocate;
-        best_mem_block->size -= size + DYNAMIC_MEM_NODE_SIZE;
-
-        void *ret = (void *)((uint8_t *)mem_node_allocate + DYNAMIC_MEM_NODE_SIZE);
-        return ret;
-    }
-
-    best_mem_block->used = true;
-    void *ret = (void *)((uint8_t *)best_mem_block + DYNAMIC_MEM_NODE_SIZE);
-    return ret;
+    block->used = true;
+    return (void *)((uint8_t *)block + DYNAMIC_MEM_NODE_SIZE);
 }
 
-void mem_free(void *p) {
-    if (p == NULL_POINTER) {
+void mem_free(void *p)
+{
+    if (p == NULL_POINTER)
         return;
-    }
 
-    dynamic_mem_node_t *current_mem_node = (dynamic_mem_node_t *) ((uint8_t *) p - DYNAMIC_MEM_NODE_SIZE);
+    dynamic_mem_node_t *node =
+        (dynamic_mem_node_t *)((uint8_t *)p - DYNAMIC_MEM_NODE_SIZE);
 
-    if (current_mem_node == NULL_POINTER) return;
+    if (node == NULL_POINTER)
+        return;
 
-    current_mem_node->used = false;
+    node->used = false;
 
-    //merge unused blocks
-    current_mem_node = merge_next_node_into_current(current_mem_node);
-    merge_current_node_into_previous(current_mem_node);
+    node = merge_next_node_into_current(node);
+    merge_current_node_into_previous(node);
 }
 
-void *realloc(void *p, size_t size) {
-    // realloc(NULL, size) == malloc(size)
+void *realloc(void *p, size_t size)
+{
     if (p == NULL_POINTER)
         return malloc(size);
 
-    // realloc(p, 0) == free(p) + return NULL
     if (size == 0) {
         mem_free(p);
         return NULL_POINTER;
     }
 
-    // bounds check
-    if ((void*)p < (void*)dynamic_mem_area ||
-        (void*)p >= (void*)dynamic_mem_area + DYNAMIC_MEM_TOTAL_SIZE) {
+    if ((void *)p < (void *)dynamic_mem_area ||
+        (void *)p >= (void *)dynamic_mem_area + DYNAMIC_MEM_TOTAL_SIZE)
         return NULL_POINTER;
-    }
 
-    dynamic_mem_node_t *current_mem_node = (dynamic_mem_node_t *)((uint8_t *)p - DYNAMIC_MEM_NODE_SIZE);
+    dynamic_mem_node_t *node =
+        (dynamic_mem_node_t *)((uint8_t *)p - DYNAMIC_MEM_NODE_SIZE);
 
-    // already big enough? don't bother moving house
-    if (current_mem_node->size >= size)
+    if (node->size >= size)
         return p;
 
-    // gotta find a new place and move in
     void *new_p = malloc(size);
     if (new_p == NULL_POINTER)
         return NULL_POINTER;
 
     uint8_t *src = (uint8_t *)p;
     uint8_t *dst = (uint8_t *)new_p;
-    for (size_t i = 0; i < current_mem_node->size; i++)
+    for (size_t i = 0; i < node->size; i++)
         dst[i] = src[i];
-    mem_free(p);
 
+    mem_free(p);
     return new_p;
 }
 
 
-void *merge_next_node_into_current(dynamic_mem_node_t *current_mem_node) {
-    dynamic_mem_node_t *next_mem_node = current_mem_node->next;
-    if (next_mem_node != NULL_POINTER && !next_mem_node->used) {
-        // add size of next block to current block
-        current_mem_node->size += current_mem_node->next->size;
-        current_mem_node->size += DYNAMIC_MEM_NODE_SIZE;
+/* =========================================================
+ * Block coalescing helpers
+ * ========================================================= */
 
-        // remove next block from list
-        current_mem_node->next = current_mem_node->next->next;
-        if (current_mem_node->next != NULL_POINTER) {
-            current_mem_node->next->prev = current_mem_node;
-        }
+void *merge_next_node_into_current(dynamic_mem_node_t *node)
+{
+    dynamic_mem_node_t *next = node->next;
+    if (next != NULL_POINTER && !next->used) {
+        node->size += next->size + DYNAMIC_MEM_NODE_SIZE;
+        node->next  = next->next;
+        if (node->next != NULL_POINTER)
+            node->next->prev = node;
     }
-    return current_mem_node;
+    return node;
 }
 
-void *merge_current_node_into_previous(dynamic_mem_node_t *current_mem_node) {
-    dynamic_mem_node_t *prev_mem_node = current_mem_node->prev;
-    if (prev_mem_node != NULL_POINTER && !prev_mem_node->used) {
-        // add size of previous block to current block
-        prev_mem_node->size += current_mem_node->size;
-        prev_mem_node->size += DYNAMIC_MEM_NODE_SIZE;
-
-        // remove current node from list
-        prev_mem_node->next = current_mem_node->next;
-        if (current_mem_node->next != NULL_POINTER) {
-            current_mem_node->next->prev = prev_mem_node;
-        }
+void *merge_current_node_into_previous(dynamic_mem_node_t *node)
+{
+    dynamic_mem_node_t *prev = node->prev;
+    if (prev != NULL_POINTER && !prev->used) {
+        prev->size += node->size + DYNAMIC_MEM_NODE_SIZE;
+        prev->next  = node->next;
+        if (node->next != NULL_POINTER)
+            node->next->prev = prev;
     }
-    return prev_mem_node;
+    return prev;
 }

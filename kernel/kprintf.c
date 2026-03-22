@@ -1,77 +1,87 @@
+/*
+ * kprintf.c - VGA text-mode output
+ *
+ * Covers: kprint, kprintf, ksprintf, and VGA cursor/cell helpers
+ *         used by the editor subsystem.
+ */
+
 #include "kprintf.h"
 #include <stdarg.h>
 #include <stdint.h>
 
-char *vidptr = (char*)0xb8000;
+char        *vidptr      = (char *)0xb8000;
 unsigned int current_loc = 0;
 
-/* ---------------------------------------------------------- */
-/* Internal helpers                                            */
-/* ---------------------------------------------------------- */
 
-static char *convert_to_buf(unsigned int num, int base, char *buf_end) {
-    static char Representation[] = "0123456789ABCDEF";
-    char *ptr = buf_end;
-    *ptr = '\0';
-    do {
-        *--ptr = Representation[num % base];
-        num /= base;
-    } while (num != 0);
-    return ptr;
-}
-
-char *convert(unsigned int num, int base) {
-    static char Representation[] = "0123456789ABCDEF";
-    static char buf[50];
-    char *ptr = &buf[49];
-    *ptr = '\0';
-    do {
-        *--ptr = Representation[num % base];
-        num /= base;
-    } while (num != 0);
-    return ptr;
-}
-
-/* ---------------------------------------------------------- */
-/* VGA editor helpers                                          */
-/* ---------------------------------------------------------- */
+/* =========================================================
+ * Internal helpers
+ * ========================================================= */
 
 /*
- * Set current_loc to (row, col) so the next kprint/kprintf
- * call writes there. Both are 0-indexed.
+ * Write the decimal/hex/octal representation of num (in the given base)
+ * into buf[], working backwards from buf_end. Returns a pointer to the
+ * start of the string within buf[]. buf_end must point to the last byte
+ * of a caller-supplied buffer large enough to hold the result + NUL.
  */
-void kvga_set_cursor(int row, int col) {
+static char *itoa_into(unsigned int num, int base, char *buf_end)
+{
+    static const char digits[] = "0123456789ABCDEF";
+    char *p = buf_end;
+    *p = '\0';
+    do {
+        *--p = digits[num % base];
+        num /= base;
+    } while (num != 0);
+    return p;
+}
+
+/*
+ * Same conversion but into a shared static buffer — safe for kprintf's
+ * VGA path where we don't need re-entrancy between format specifiers.
+ */
+static char *itoa_static(unsigned int num, int base)
+{
+    static char buf[50];
+    return itoa_into(num, base, &buf[49]);
+}
+
+
+/* =========================================================
+ * VGA editor helpers
+ * ========================================================= */
+
+/* Position the VGA cursor (0-indexed row, col). */
+void kvga_set_cursor(int row, int col)
+{
     current_loc = (row * COLUMNS_IN_LINE + col) * BYTES_FOR_EACH_ELEMENT;
 }
 
-/*
- * Blank every cell from (row, col) to end of that row.
- * Leaves current_loc at start of next row.
- */
-void kvga_clear_to_eol(int row, int col) {
-    unsigned int loc = (row * COLUMNS_IN_LINE + col) * BYTES_FOR_EACH_ELEMENT;
-    unsigned int end = (row * COLUMNS_IN_LINE + COLUMNS_IN_LINE) * BYTES_FOR_EACH_ELEMENT;
+/* Blank every cell from (row, col) to end of that row. */
+void kvga_clear_to_eol(int row, int col)
+{
+    unsigned int loc = (row * COLUMNS_IN_LINE + col)              * BYTES_FOR_EACH_ELEMENT;
+    unsigned int end = (row * COLUMNS_IN_LINE + COLUMNS_IN_LINE)  * BYTES_FOR_EACH_ELEMENT;
     while (loc < end) {
         vidptr[loc++] = ' ';
         vidptr[loc++] = 0x07;
     }
 }
 
-/*
- * Write a single character with explicit attribute byte at (row, col).
- * Useful for the status bar (reversed video = 0x70).
- */
-void kvga_write_char(int row, int col, char c, uint8_t attr) {
+/* Write a single character with an explicit attribute byte (e.g. 0x70 for reversed video). */
+void kvga_write_char(int row, int col, char c, uint8_t attr)
+{
     unsigned int loc = (row * COLUMNS_IN_LINE + col) * BYTES_FOR_EACH_ELEMENT;
     vidptr[loc]     = c;
     vidptr[loc + 1] = attr;
 }
 
-/* ---------------------------------------------------------- */
-/* Original functions — unchanged                             */
-/* ---------------------------------------------------------- */
 
-void kprint(const char *str) {
+/* =========================================================
+ * Core output
+ * ========================================================= */
+
+void kprint(const char *str)
+{
     unsigned int i = 0;
     while (str[i] != '\0') {
         vidptr[current_loc++] = str[i++];
@@ -79,12 +89,14 @@ void kprint(const char *str) {
     }
 }
 
-void kprint_newline(void) {
+void kprint_newline(void)
+{
     unsigned int line_size = BYTES_FOR_EACH_ELEMENT * COLUMNS_IN_LINE;
     current_loc = current_loc + (line_size - current_loc % line_size);
 }
 
-void clear_screen(void) {
+void clear_screen(void)
+{
     unsigned int i = 0;
     while (i < SCREENSIZE) {
         vidptr[i++] = ' ';
@@ -93,9 +105,10 @@ void clear_screen(void) {
     current_loc = 0;
 }
 
-void kprint_hex(uint32_t val) {
+void kprint_hex(uint32_t val)
+{
     char buf[11] = "0x00000000";
-    char hex[] = "0123456789ABCDEF";
+    const char hex[] = "0123456789ABCDEF";
     for (int i = 9; i >= 2; i--) {
         buf[i] = hex[val & 0xF];
         val >>= 4;
@@ -104,43 +117,48 @@ void kprint_hex(uint32_t val) {
     kprint_newline();
 }
 
-void kprintf(const char *format, ...) {
-    char *traverse;
-    unsigned int i;
-    char *s;
 
+/* =========================================================
+ * kprintf — formatted output to VGA
+ * ========================================================= */
+
+void kprintf(const char *format, ...)
+{
     va_list arg;
     va_start(arg, format);
 
-    for (traverse = (char*)format; *traverse != '\0'; traverse++) {
-        if (*traverse == '\n') {
+    for (const char *p = format; *p != '\0'; p++) {
+        if (*p == '\n') {
             kprint_newline();
             continue;
         }
 
-        if (*traverse != '%') {
-            vidptr[current_loc++] = *traverse;
+        if (*p != '%') {
+            vidptr[current_loc++] = *p;
             vidptr[current_loc++] = 0x07;
             continue;
         }
 
-        traverse++;
+        p++;
 
-        /* Handle precision/width prefix e.g. %.*s, %.20s */
+        /* Optional precision: %.N or *.s */
         int precision = -1;
-        if (*traverse == '.') {
-            traverse++;
-            if (*traverse == '*') {
+        if (*p == '.') {
+            p++;
+            if (*p == '*') {
                 precision = va_arg(arg, int);
-                traverse++;
+                p++;
             } else {
                 precision = 0;
-                while (*traverse >= '0' && *traverse <= '9')
-                    precision = precision * 10 + (*traverse++ - '0');
+                while (*p >= '0' && *p <= '9')
+                    precision = precision * 10 + (*p++ - '0');
             }
         }
 
-        switch (*traverse) {
+        char *s;
+        unsigned int i;
+
+        switch (*p) {
             case 'c':
                 i = va_arg(arg, int);
                 vidptr[current_loc++] = (char)i;
@@ -150,46 +168,32 @@ void kprintf(const char *format, ...) {
             case 'd':
                 i = va_arg(arg, int);
                 if ((int)i < 0) {
-                    i = -i;
+                    i = -(int)i;
                     vidptr[current_loc++] = '-';
                     vidptr[current_loc++] = 0x07;
                 }
-                s = convert(i, 10);
-                while (*s) {
-                    vidptr[current_loc++] = *s++;
-                    vidptr[current_loc++] = 0x07;
-                }
+                s = itoa_static(i, 10);
+                while (*s) { vidptr[current_loc++] = *s++; vidptr[current_loc++] = 0x07; }
                 break;
 
             case 'o':
                 i = va_arg(arg, unsigned int);
-                s = convert(i, 8);
-                while (*s) {
-                    vidptr[current_loc++] = *s++;
-                    vidptr[current_loc++] = 0x07;
-                }
+                s = itoa_static(i, 8);
+                while (*s) { vidptr[current_loc++] = *s++; vidptr[current_loc++] = 0x07; }
                 break;
 
             case 's':
-                s = va_arg(arg, char*);
+                s = va_arg(arg, char *);
                 while (*s) {
-                    if (*s == '\n') {
-                        kprint_newline();
-                        s++;
-                    } else {
-                        vidptr[current_loc++] = *s++;
-                        vidptr[current_loc++] = 0x07;
-                    }
+                    if (*s == '\n') { kprint_newline(); s++; }
+                    else            { vidptr[current_loc++] = *s++; vidptr[current_loc++] = 0x07; }
                 }
                 break;
 
             case 'x':
                 i = va_arg(arg, unsigned int);
-                s = convert(i, 16);
-                while (*s) {
-                    vidptr[current_loc++] = *s++;
-                    vidptr[current_loc++] = 0x07;
-                }
+                s = itoa_static(i, 16);
+                while (*s) { vidptr[current_loc++] = *s++; vidptr[current_loc++] = 0x07; }
                 break;
 
             case '%':
@@ -202,77 +206,82 @@ void kprintf(const char *format, ...) {
     va_end(arg);
 }
 
-int ksprintf(char *buf, const char *format, ...) {
-    char *traverse;
-    unsigned int i;
-    char *s;
-    char *buf_start = buf;
 
+/* =========================================================
+ * ksprintf — formatted output to a string buffer
+ * ========================================================= */
+
+int ksprintf(char *buf, const char *format, ...)
+{
+    char *out = buf;
     va_list arg;
     va_start(arg, format);
 
-    for (traverse = (char*)format; *traverse != '\0'; traverse++) {
-        if (*traverse == '\n') { *buf++ = '\n'; continue; }
-        if (*traverse != '%') { *buf++ = *traverse; continue; }
+    for (const char *p = format; *p != '\0'; p++) {
+        if (*p == '\n') { *out++ = '\n'; continue; }
 
-        traverse++;
+        if (*p != '%') { *out++ = *p; continue; }
 
+        p++;
+
+        /* Optional precision */
         int precision = -1;
-        if (*traverse == '.') {
-            traverse++;
-            if (*traverse == '*') {
+        if (*p == '.') {
+            p++;
+            if (*p == '*') {
                 precision = va_arg(arg, int);
-                traverse++;
+                p++;
             } else {
                 precision = 0;
-                while (*traverse >= '0' && *traverse <= '9')
-                    precision = precision * 10 + (*traverse++ - '0');
+                while (*p >= '0' && *p <= '9')
+                    precision = precision * 10 + (*p++ - '0');
             }
         }
 
-        switch (*traverse) {
+        char tmp[50];
+        char *s;
+        unsigned int i;
+
+        switch (*p) {
             case 'c':
-                i = va_arg(arg, int);
-                *buf++ = (char)i;
+                *out++ = (char)va_arg(arg, int);
                 break;
-            case 'd': {
+
+            case 'd':
                 i = va_arg(arg, int);
-                if ((int)i < 0) { i = -(int)i; *buf++ = '-'; }
-                char numbuf[50];
-                s = convert_to_buf(i, 10, &numbuf[49]);
-                while (*s) *buf++ = *s++;
+                if ((int)i < 0) { i = -(int)i; *out++ = '-'; }
+                s = itoa_into(i, 10, &tmp[49]);
+                while (*s) *out++ = *s++;
                 break;
-            }
-            case 'o': {
+
+            case 'o':
                 i = va_arg(arg, unsigned int);
-                char octbuf[50];
-                s = convert_to_buf(i, 8, &octbuf[49]);
-                while (*s) *buf++ = *s++;
+                s = itoa_into(i, 8, &tmp[49]);
+                while (*s) *out++ = *s++;
                 break;
-            }
+
             case 's':
-                s = va_arg(arg, char*);
+                s = va_arg(arg, char *);
                 if (precision >= 0) {
-                    int n = 0;
-                    while (*s && n < precision) { *buf++ = *s++; n++; }
+                    for (int n = 0; *s && n < precision; n++) *out++ = *s++;
                 } else {
-                    while (*s) *buf++ = *s++;
+                    while (*s) *out++ = *s++;
                 }
                 break;
-            case 'x': {
+
+            case 'x':
                 i = va_arg(arg, unsigned int);
-                char hexbuf[50];
-                s = convert_to_buf(i, 16, &hexbuf[49]);
-                while (*s) *buf++ = *s++;
+                s = itoa_into(i, 16, &tmp[49]);
+                while (*s) *out++ = *s++;
                 break;
-            }
+
             case '%':
-                *buf++ = '%';
+                *out++ = '%';
                 break;
         }
     }
 
-    *buf = '\0';
+    *out = '\0';
     va_end(arg);
-    return (int)(buf - buf_start);
+    return (int)(out - buf);
 }
