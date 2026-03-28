@@ -37,10 +37,33 @@ CMakeFiles/kernel.elf.dir/fs/ed.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed
   /mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.h
 
 CMakeFiles/kernel.elf.dir/kernel/Shell.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.c \
+  /home/erik/opt/cross/i686-elf/include/_ansi.h \
+  /home/erik/opt/cross/i686-elf/include/_newlib_version.h \
+  /home/erik/opt/cross/i686-elf/include/machine/_default_types.h \
+  /home/erik/opt/cross/i686-elf/include/machine/_endian.h \
+  /home/erik/opt/cross/i686-elf/include/machine/_types.h \
+  /home/erik/opt/cross/i686-elf/include/machine/endian.h \
+  /home/erik/opt/cross/i686-elf/include/machine/ieeefp.h \
+  /home/erik/opt/cross/i686-elf/include/machine/types.h \
+  /home/erik/opt/cross/i686-elf/include/newlib.h \
+  /home/erik/opt/cross/i686-elf/include/sys/_pthreadtypes.h \
+  /home/erik/opt/cross/i686-elf/include/sys/_sigset.h \
+  /home/erik/opt/cross/i686-elf/include/sys/_stdint.h \
+  /home/erik/opt/cross/i686-elf/include/sys/_timespec.h \
+  /home/erik/opt/cross/i686-elf/include/sys/_timeval.h \
+  /home/erik/opt/cross/i686-elf/include/sys/_types.h \
+  /home/erik/opt/cross/i686-elf/include/sys/cdefs.h \
+  /home/erik/opt/cross/i686-elf/include/sys/config.h \
+  /home/erik/opt/cross/i686-elf/include/sys/features.h \
+  /home/erik/opt/cross/i686-elf/include/sys/sched.h \
+  /home/erik/opt/cross/i686-elf/include/sys/select.h \
+  /home/erik/opt/cross/i686-elf/include/sys/timespec.h \
+  /home/erik/opt/cross/i686-elf/include/sys/types.h \
   /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdbool.h \
   /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stddef.h \
   /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint-gcc.h \
   /home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint.h \
+  /mnt/c/Users/Erik/Documents/OSAttempt/drivers/acpi.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.h \
   /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.h \
@@ -106,76 +129,122 @@ CMakeFiles/kernel.elf.dir/kernel/time.c.o:
 
 CMakeFiles/kernel.elf.dir/kernel/string.c.o:
 
-CMakeFiles/kernel.elf.dir/kernel/mm.c.o:
+/home/erik/opt/cross/i686-elf/include/machine/_default_types.h:
 
-CMakeFiles/kernel.elf.dir/kernel/Shell.c.o:
+/home/erik/opt/cross/i686-elf/include/sys/_sigset.h:
 
-CMakeFiles/kernel.elf.dir/fs/ed.c.o:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.h:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.h:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/fs/fs_types.h:
-
-CMakeFiles/kernel.elf.dir/kernel/boot.asm.o:
-
-/home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint.h:
-
-CMakeFiles/kernel.elf.dir/kernel/kernel.c.o:
-
-CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/fs/fs_config.h:
-
-/home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint-gcc.h:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.h:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.h:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.h:
-
-/home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stddef.h:
+/home/erik/opt/cross/i686-elf/include/_newlib_version.h:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/drivers/keyboard_map.h:
 
-CMakeFiles/kernel.elf.dir/fs/easyfs.c.o:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.c:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.c:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.c:
-
-/home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdbool.h:
-
-/mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.h:
+/mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.c:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.h:
 
-CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o:
+/mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.c:
+
+CMakeFiles/kernel.elf.dir/kernel/mm.c.o:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.h:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.h:
+
+/home/erik/opt/cross/i686-elf/include/machine/_types.h:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.h:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.h:
+
+/home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint-gcc.h:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/fs/fs_config.h:
+
+CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o:
+
+CMakeFiles/kernel.elf.dir/kernel/kernel.c.o:
+
+/home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdint.h:
+
+/home/erik/opt/cross/i686-elf/include/sys/_pthreadtypes.h:
+
+/home/erik/opt/cross/i686-elf/include/_ansi.h:
+
+/home/erik/opt/cross/i686-elf/include/sys/_timeval.h:
+
+CMakeFiles/kernel.elf.dir/kernel/boot.asm.o:
+
+/home/erik/opt/cross/i686-elf/include/sys/_stdint.h:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/drivers/acpi.h:
+
+/home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdbool.h:
+
+/home/erik/opt/cross/i686-elf/include/sys/config.h:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.c:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/kernel/string.c:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/fs/fs_types.h:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/kernel/mm.h:
+
+/home/erik/opt/cross/i686-elf/include/machine/ieeefp.h:
+
+/home/erik/opt/cross/i686-elf/include/newlib.h:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.c:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kernel.c:
 
-/mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o:
+CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o:
+
+/mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.h:
+
+/home/erik/opt/cross/i686-elf/include/machine/types.h:
+
+/home/erik/opt/cross/i686-elf/include/sys/_timespec.h:
+
+CMakeFiles/kernel.elf.dir/fs/ed.c.o:
+
+/home/erik/opt/cross/i686-elf/include/sys/_types.h:
+
+/home/erik/opt/cross/i686-elf/include/sys/cdefs.h:
+
+/home/erik/opt/cross/i686-elf/include/sys/features.h:
+
+/home/erik/opt/cross/i686-elf/include/sys/sched.h:
+
+/home/erik/opt/cross/i686-elf/include/machine/endian.h:
+
+/home/erik/opt/cross/i686-elf/include/sys/timespec.h:
+
+/home/erik/opt/cross/i686-elf/include/machine/_endian.h:
+
+/home/erik/opt/cross/i686-elf/include/sys/select.h:
+
+/home/erik/opt/cross/i686-elf/include/sys/types.h:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/kernel/time.h:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/kernel/kprintf.c:
 
-/mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.c:
-
-/home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdarg.h:
-
 /mnt/c/Users/Erik/Documents/OSAttempt/kernel/time.c:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/linker/linker.ld:
 
+/mnt/c/Users/Erik/Documents/OSAttempt/user_bin.o:
+
+/home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stdarg.h:
+
+/home/erik/opt/cross/lib/gcc/i686-elf/13.2.0/include/stddef.h:
+
 /mnt/c/Users/Erik/Documents/OSAttempt/user_editor_bin.o:
 
 /mnt/c/Users/Erik/Documents/OSAttempt/user_shell_bin.o:
+
+CMakeFiles/kernel.elf.dir/fs/easyfs.c.o:
+
+CMakeFiles/kernel.elf.dir/kernel/Shell.c.o:

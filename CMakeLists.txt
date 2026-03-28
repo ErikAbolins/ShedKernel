@@ -84,6 +84,7 @@ add_executable(kernel.elf
         drivers/kbd_driver.c
         drivers/kbd_driver.h
         drivers/keyboard_map.h
+        drivers/acpi.h
         fs/easyfs.c
         fs/easyfs.h
         fs/fs_config.h

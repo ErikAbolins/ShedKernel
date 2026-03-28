@@ -32,6 +32,7 @@ extern char *vidptr;
 static driver_t state = { .initialized = 0, .enabled = 0 };
 
 static void kbd_push(int code) {
+    if((kbd_buf_write + 1) % KBD_BUF_SIZE == kbd_buf_read) return;
     kbd_buf[kbd_buf_write] = code;
     kbd_buf_write = (kbd_buf_write + 1) % KBD_BUF_SIZE;
 }

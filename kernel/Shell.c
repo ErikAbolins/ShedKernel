@@ -13,6 +13,7 @@
 #include "kbd_driver.h"
 #include "easyfs.h"
 #include "ed.h"
+#include "acpi.h"
 
 #define LSH_RL_BUFSIZE  1024
 #define LSH_TOK_BUFSIZE 64
@@ -39,6 +40,7 @@ int lsh_cat(char **args);
 int lsh_launch(char **args);
 int lsh_ring3(char **args);
 int lsh_ring3_shell(char **args);
+int lsh_shutdown(char **args);
 
 static char *builtin_str[] = {
     "help",
@@ -50,6 +52,7 @@ static char *builtin_str[] = {
     "cat",
     "ring3",
     "ring3_shell",
+    "shutdown",
 };
 
 static int (*builtin_func[])(char **) = {
@@ -62,6 +65,7 @@ static int (*builtin_func[])(char **) = {
     &lsh_cat,
     &lsh_ring3,
     &lsh_ring3_shell,
+    &lsh_shutdown,
 };
 
 int lsh_num_builtins(void)
@@ -324,4 +328,12 @@ int lsh_ring3_shell(char **args)
     (void)args;
     jump_to_shell();
     return 1;
+}
+
+
+int lsh_shutdown(char **args) {
+    (void)args;
+    kprintf("Shutting down the system\n");
+    outw(0x604, 0x2000);
+
 }
