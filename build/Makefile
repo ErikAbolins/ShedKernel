@@ -168,6 +168,19 @@ kernel.elf/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/build
 .PHONY : kernel.elf/fast
 
+#=============================================================================
+# Target rules for targets named iso
+
+# Build rule for target.
+iso: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 iso
+.PHONY : iso
+
+# fast build rule for target.
+iso/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/iso.dir/build.make CMakeFiles/iso.dir/build
+.PHONY : iso/fast
+
 drivers/kbd_driver.o: drivers/kbd_driver.c.o
 .PHONY : drivers/kbd_driver.o
 
@@ -191,6 +204,30 @@ drivers/kbd_driver.s: drivers/kbd_driver.c.s
 drivers/kbd_driver.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.s
 .PHONY : drivers/kbd_driver.c.s
+
+drivers/vga13.o: drivers/vga13.c.o
+.PHONY : drivers/vga13.o
+
+# target to build an object file
+drivers/vga13.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/drivers/vga13.c.o
+.PHONY : drivers/vga13.c.o
+
+drivers/vga13.i: drivers/vga13.c.i
+.PHONY : drivers/vga13.i
+
+# target to preprocess a source file
+drivers/vga13.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/drivers/vga13.c.i
+.PHONY : drivers/vga13.c.i
+
+drivers/vga13.s: drivers/vga13.c.s
+.PHONY : drivers/vga13.s
+
+# target to generate assembly for a file
+drivers/vga13.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/drivers/vga13.c.s
+.PHONY : drivers/vga13.c.s
 
 fs/easyfs.o: fs/easyfs.c.o
 .PHONY : fs/easyfs.o
@@ -400,6 +437,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... iso"
 	@echo "... user_binary"
 	@echo "... user_editor_binary"
 	@echo "... user_shell_binary"
@@ -407,6 +445,9 @@ help:
 	@echo "... drivers/kbd_driver.o"
 	@echo "... drivers/kbd_driver.i"
 	@echo "... drivers/kbd_driver.s"
+	@echo "... drivers/vga13.o"
+	@echo "... drivers/vga13.i"
+	@echo "... drivers/vga13.s"
 	@echo "... fs/easyfs.o"
 	@echo "... fs/easyfs.i"
 	@echo "... fs/easyfs.s"

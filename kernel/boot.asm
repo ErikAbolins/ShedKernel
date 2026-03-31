@@ -3,8 +3,18 @@ bits 32
 section .multiboot
 align 4
     dd 0x1BADB002
-    dd 0x00
-    dd -(0x1BADB002 + 0x00)
+    dd 0x00000007
+    dd -(0x1BADB002 + 0x00000007)
+
+    dd 0
+    dd 0
+    dd 0
+    dd 0
+    dd 0
+    dd 0
+    dd 640
+    dd 480
+    dd 32
 
 section .text
 global _start
@@ -97,7 +107,9 @@ syscall_handler:
 
 _start:
     cli
-    mov esp, stack_space
+    mov esp, 0x90000   ; stack first
+    push ebx               ; arg2: multiboot info ptr
+    push eax               ; arg1: multiboot magic (GRUB puts 0x2BADB002 in eax)
 
     ;zero BSS
     mov edi, bss_start

@@ -33,6 +33,7 @@ void *merge_current_node_into_previous(dynamic_mem_node_t *node);
 
 void paging_alloc_init();
 u32 alloc_page_frame();
+void map_kernel_page(u32 virt, u32 phys);
 
 
 #endif /* MM_H */

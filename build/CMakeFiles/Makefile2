@@ -79,6 +79,7 @@ clean: CMakeFiles/user_binary.dir/clean
 clean: CMakeFiles/user_shell_binary.dir/clean
 clean: CMakeFiles/user_editor_binary.dir/clean
 clean: CMakeFiles/kernel.elf.dir/clean
+clean: CMakeFiles/iso.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -88,7 +89,7 @@ clean: CMakeFiles/kernel.elf.dir/clean
 CMakeFiles/user_binary.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/user_binary.dir/build.make CMakeFiles/user_binary.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/user_binary.dir/build.make CMakeFiles/user_binary.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=12 "Built target user_binary"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=14 "Built target user_binary"
 .PHONY : CMakeFiles/user_binary.dir/all
 
 # Build rule for subdir invocation for target.
@@ -105,7 +106,7 @@ user_binary: CMakeFiles/user_binary.dir/rule
 # codegen rule for target.
 CMakeFiles/user_binary.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/user_binary.dir/build.make CMakeFiles/user_binary.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=12 "Finished codegen for target user_binary"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=14 "Finished codegen for target user_binary"
 .PHONY : CMakeFiles/user_binary.dir/codegen
 
 # clean rule for target.
@@ -120,7 +121,7 @@ CMakeFiles/user_binary.dir/clean:
 CMakeFiles/user_shell_binary.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/user_shell_binary.dir/build.make CMakeFiles/user_shell_binary.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/user_shell_binary.dir/build.make CMakeFiles/user_shell_binary.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=14 "Built target user_shell_binary"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=16 "Built target user_shell_binary"
 .PHONY : CMakeFiles/user_shell_binary.dir/all
 
 # Build rule for subdir invocation for target.
@@ -137,7 +138,7 @@ user_shell_binary: CMakeFiles/user_shell_binary.dir/rule
 # codegen rule for target.
 CMakeFiles/user_shell_binary.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/user_shell_binary.dir/build.make CMakeFiles/user_shell_binary.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=14 "Finished codegen for target user_shell_binary"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=16 "Finished codegen for target user_shell_binary"
 .PHONY : CMakeFiles/user_shell_binary.dir/codegen
 
 # clean rule for target.
@@ -152,7 +153,7 @@ CMakeFiles/user_shell_binary.dir/clean:
 CMakeFiles/user_editor_binary.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/user_editor_binary.dir/build.make CMakeFiles/user_editor_binary.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/user_editor_binary.dir/build.make CMakeFiles/user_editor_binary.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=13 "Built target user_editor_binary"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=15 "Built target user_editor_binary"
 .PHONY : CMakeFiles/user_editor_binary.dir/all
 
 # Build rule for subdir invocation for target.
@@ -169,7 +170,7 @@ user_editor_binary: CMakeFiles/user_editor_binary.dir/rule
 # codegen rule for target.
 CMakeFiles/user_editor_binary.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/user_editor_binary.dir/build.make CMakeFiles/user_editor_binary.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=13 "Finished codegen for target user_editor_binary"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=15 "Finished codegen for target user_editor_binary"
 .PHONY : CMakeFiles/user_editor_binary.dir/codegen
 
 # clean rule for target.
@@ -186,12 +187,12 @@ CMakeFiles/kernel.elf.dir/all: CMakeFiles/user_shell_binary.dir/all
 CMakeFiles/kernel.elf.dir/all: CMakeFiles/user_editor_binary.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target kernel.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=2,3,4,5,6,7,8,9,10,11,12,13 "Built target kernel.elf"
 .PHONY : CMakeFiles/kernel.elf.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/kernel.elf.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles 15
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/kernel.elf.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles 0
 .PHONY : CMakeFiles/kernel.elf.dir/rule
@@ -205,13 +206,45 @@ CMakeFiles/kernel.elf.dir/codegen: CMakeFiles/user_binary.dir/all
 CMakeFiles/kernel.elf.dir/codegen: CMakeFiles/user_shell_binary.dir/all
 CMakeFiles/kernel.elf.dir/codegen: CMakeFiles/user_editor_binary.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Finished codegen for target kernel.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=2,3,4,5,6,7,8,9,10,11,12,13 "Finished codegen for target kernel.elf"
 .PHONY : CMakeFiles/kernel.elf.dir/codegen
 
 # clean rule for target.
 CMakeFiles/kernel.elf.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kernel.elf.dir/build.make CMakeFiles/kernel.elf.dir/clean
 .PHONY : CMakeFiles/kernel.elf.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/iso.dir
+
+# All Build rule for target.
+CMakeFiles/iso.dir/all: CMakeFiles/kernel.elf.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/iso.dir/build.make CMakeFiles/iso.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/iso.dir/build.make CMakeFiles/iso.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=1 "Built target iso"
+.PHONY : CMakeFiles/iso.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/iso.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles 16
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/iso.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles 0
+.PHONY : CMakeFiles/iso.dir/rule
+
+# Convenience name for target.
+iso: CMakeFiles/iso.dir/rule
+.PHONY : iso
+
+# codegen rule for target.
+CMakeFiles/iso.dir/codegen: CMakeFiles/kernel.elf.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/iso.dir/build.make CMakeFiles/iso.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=1 "Finished codegen for target iso"
+.PHONY : CMakeFiles/iso.dir/codegen
+
+# clean rule for target.
+CMakeFiles/iso.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/iso.dir/build.make CMakeFiles/iso.dir/clean
+.PHONY : CMakeFiles/iso.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

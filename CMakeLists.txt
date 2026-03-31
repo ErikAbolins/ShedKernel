@@ -85,6 +85,8 @@ add_executable(kernel.elf
         drivers/kbd_driver.h
         drivers/keyboard_map.h
         drivers/acpi.h
+        drivers/vga13.h
+        drivers/vga13.c
         fs/easyfs.c
         fs/easyfs.h
         fs/fs_config.h
@@ -96,6 +98,24 @@ add_executable(kernel.elf
 add_dependencies(kernel.elf user_binary)
 add_dependencies(kernel.elf user_shell_binary)
 add_dependencies(kernel.elf user_editor_binary)
+
+# ── ISO ───────────────────────────────────────────────────────────────────────
+
+set(ISO_DIR ${CMAKE_SOURCE_DIR}/iso)
+set(ISO_GRUB_DIR ${ISO_DIR}/boot/grub)
+set(ISO_OUTPUT ${CMAKE_SOURCE_DIR}/shedkernel.iso)
+
+file(MAKE_DIRECTORY ${ISO_GRUB_DIR})
+
+
+
+add_custom_target(iso
+    COMMAND cp ${CMAKE_BINARY_DIR}/kernel.elf ${ISO_DIR}/boot/kernel.elf
+    COMMAND grub-mkrescue -o ${ISO_OUTPUT} ${ISO_DIR}
+    DEPENDS kernel.elf
+    COMMENT "Building ShedKernel ISO"
+    VERBATIM
+)
 
 target_include_directories(kernel.elf PRIVATE
         kernel drivers fs user

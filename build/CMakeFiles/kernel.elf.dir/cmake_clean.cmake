@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/kernel.elf.dir/link.d"
   "CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o"
   "CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o.d"
+  "CMakeFiles/kernel.elf.dir/drivers/vga13.c.o"
+  "CMakeFiles/kernel.elf.dir/drivers/vga13.c.o.d"
   "CMakeFiles/kernel.elf.dir/fs/easyfs.c.o"
   "CMakeFiles/kernel.elf.dir/fs/easyfs.c.o.d"
   "CMakeFiles/kernel.elf.dir/fs/ed.c.o"

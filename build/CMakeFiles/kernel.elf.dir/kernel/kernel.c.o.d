@@ -12,4 +12,5 @@ CMakeFiles/kernel.elf.dir/kernel/kernel.c.o: \
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.h \
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/fs_config.h \
  /mnt/c/Users/Erik/Documents/OSAttempt/fs/fs_types.h \
- /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.h
+ /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.h \
+ /mnt/c/Users/Erik/Documents/OSAttempt/drivers/vga13.h

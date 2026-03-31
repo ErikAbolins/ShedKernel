@@ -176,10 +176,24 @@ CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.s"
 	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.c -o CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.s
 
+CMakeFiles/kernel.elf.dir/drivers/vga13.c.o: CMakeFiles/kernel.elf.dir/flags.make
+CMakeFiles/kernel.elf.dir/drivers/vga13.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/drivers/vga13.c
+CMakeFiles/kernel.elf.dir/drivers/vga13.c.o: CMakeFiles/kernel.elf.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/kernel.elf.dir/drivers/vga13.c.o"
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/drivers/vga13.c.o -MF CMakeFiles/kernel.elf.dir/drivers/vga13.c.o.d -o CMakeFiles/kernel.elf.dir/drivers/vga13.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/drivers/vga13.c
+
+CMakeFiles/kernel.elf.dir/drivers/vga13.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/kernel.elf.dir/drivers/vga13.c.i"
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Erik/Documents/OSAttempt/drivers/vga13.c > CMakeFiles/kernel.elf.dir/drivers/vga13.c.i
+
+CMakeFiles/kernel.elf.dir/drivers/vga13.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/kernel.elf.dir/drivers/vga13.c.s"
+	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Erik/Documents/OSAttempt/drivers/vga13.c -o CMakeFiles/kernel.elf.dir/drivers/vga13.c.s
+
 CMakeFiles/kernel.elf.dir/fs/easyfs.c.o: CMakeFiles/kernel.elf.dir/flags.make
 CMakeFiles/kernel.elf.dir/fs/easyfs.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.c
 CMakeFiles/kernel.elf.dir/fs/easyfs.c.o: CMakeFiles/kernel.elf.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/kernel.elf.dir/fs/easyfs.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/kernel.elf.dir/fs/easyfs.c.o"
 	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/fs/easyfs.c.o -MF CMakeFiles/kernel.elf.dir/fs/easyfs.c.o.d -o CMakeFiles/kernel.elf.dir/fs/easyfs.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.c
 
 CMakeFiles/kernel.elf.dir/fs/easyfs.c.i: cmake_force
@@ -193,7 +207,7 @@ CMakeFiles/kernel.elf.dir/fs/easyfs.c.s: cmake_force
 CMakeFiles/kernel.elf.dir/fs/ed.c.o: CMakeFiles/kernel.elf.dir/flags.make
 CMakeFiles/kernel.elf.dir/fs/ed.c.o: /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c
 CMakeFiles/kernel.elf.dir/fs/ed.c.o: CMakeFiles/kernel.elf.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/kernel.elf.dir/fs/ed.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/kernel.elf.dir/fs/ed.c.o"
 	/home/erik/opt/cross/bin/i686-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/kernel.elf.dir/fs/ed.c.o -MF CMakeFiles/kernel.elf.dir/fs/ed.c.o.d -o CMakeFiles/kernel.elf.dir/fs/ed.c.o -c /mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c
 
 CMakeFiles/kernel.elf.dir/fs/ed.c.i: cmake_force
@@ -214,6 +228,7 @@ kernel_elf_OBJECTS = \
 "CMakeFiles/kernel.elf.dir/kernel/string.c.o" \
 "CMakeFiles/kernel.elf.dir/kernel/Shell.c.o" \
 "CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o" \
+"CMakeFiles/kernel.elf.dir/drivers/vga13.c.o" \
 "CMakeFiles/kernel.elf.dir/fs/easyfs.c.o" \
 "CMakeFiles/kernel.elf.dir/fs/ed.c.o"
 
@@ -228,12 +243,13 @@ kernel.elf: CMakeFiles/kernel.elf.dir/kernel/kprintf.c.o
 kernel.elf: CMakeFiles/kernel.elf.dir/kernel/string.c.o
 kernel.elf: CMakeFiles/kernel.elf.dir/kernel/Shell.c.o
 kernel.elf: CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o
+kernel.elf: CMakeFiles/kernel.elf.dir/drivers/vga13.c.o
 kernel.elf: CMakeFiles/kernel.elf.dir/fs/easyfs.c.o
 kernel.elf: CMakeFiles/kernel.elf.dir/fs/ed.c.o
 kernel.elf: CMakeFiles/kernel.elf.dir/build.make
 kernel.elf: CMakeFiles/kernel.elf.dir/compiler_depend.ts
 kernel.elf: CMakeFiles/kernel.elf.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking C executable kernel.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/c/Users/Erik/Documents/OSAttempt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking C executable kernel.elf"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/kernel.elf.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

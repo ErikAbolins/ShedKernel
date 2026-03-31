@@ -13,7 +13,9 @@
 #define DYNAMIC_MEM_NODE_SIZE   sizeof(dynamic_mem_node_t)
 
 #define PAGE_SIZE           4096
-#define PHYS_MEM_END        0x2000000   /* 32 MB */
+#define PHYS_MEM_END        0x8000000   /* 128 MB */
+
+#define PHYS_TO_VIRT(p) ((p) + 0xC0000000)
 
 typedef unsigned int u32;
 
@@ -40,6 +42,29 @@ u32 alloc_page_frame(void)
     u32 addr = next_free_page;
     next_free_page += PAGE_SIZE;
     return addr;
+}
+
+
+void map_kernel_page(u32 virt, u32 phys) {
+    extern u32 *page_directory;
+
+    u32 dir_idx = virt >> 22;
+    u32 table_idx = (virt >> 12) & 0x3FF;
+
+    if(!(page_directory[dir_idx] & 1)) {
+        u32 new_table = alloc_page_frame();
+
+        u32 *tbl = (u32*)PHYS_TO_VIRT(new_table);
+
+        for (int i = 0; i < 1024; i++) tbl[i] = 0;
+
+        page_directory[dir_idx] = new_table | 3;
+    }
+    u32 *table = (u32*)PHYS_TO_VIRT(page_directory[dir_idx] & ~0xFFF);
+
+    table[table_idx] = (phys & ~0xFFF) | 3;
+
+    asm volatile("invlpg (%0)" : : "r"(virt) : "memory");
 }
 
 

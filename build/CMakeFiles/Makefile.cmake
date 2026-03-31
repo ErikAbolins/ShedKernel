@@ -56,4 +56,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/user_shell_binary.dir/DependInfo.cmake"
   "CMakeFiles/user_editor_binary.dir/DependInfo.cmake"
   "CMakeFiles/kernel.elf.dir/DependInfo.cmake"
+  "CMakeFiles/iso.dir/DependInfo.cmake"
   )

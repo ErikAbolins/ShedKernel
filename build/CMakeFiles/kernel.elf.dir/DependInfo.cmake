@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/Users/Erik/Documents/OSAttempt/kernel/boot.asm" "CMakeFiles/kernel.elf.dir/kernel/boot.asm.o" "gcc" "CMakeFiles/kernel.elf.dir/kernel/boot.asm.o.d"
   "/mnt/c/Users/Erik/Documents/OSAttempt/drivers/kbd_driver.c" "CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o" "gcc" "CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o.d"
+  "/mnt/c/Users/Erik/Documents/OSAttempt/drivers/vga13.c" "CMakeFiles/kernel.elf.dir/drivers/vga13.c.o" "gcc" "CMakeFiles/kernel.elf.dir/drivers/vga13.c.o.d"
   "/mnt/c/Users/Erik/Documents/OSAttempt/fs/easyfs.c" "CMakeFiles/kernel.elf.dir/fs/easyfs.c.o" "gcc" "CMakeFiles/kernel.elf.dir/fs/easyfs.c.o.d"
   "/mnt/c/Users/Erik/Documents/OSAttempt/fs/ed.c" "CMakeFiles/kernel.elf.dir/fs/ed.c.o" "gcc" "CMakeFiles/kernel.elf.dir/fs/ed.c.o.d"
   "/mnt/c/Users/Erik/Documents/OSAttempt/kernel/Shell.c" "CMakeFiles/kernel.elf.dir/kernel/Shell.c.o" "gcc" "CMakeFiles/kernel.elf.dir/kernel/Shell.c.o.d"

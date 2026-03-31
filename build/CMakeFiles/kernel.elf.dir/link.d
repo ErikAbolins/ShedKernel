@@ -11,6 +11,7 @@ kernel.elf: \
   CMakeFiles/kernel.elf.dir/kernel/string.c.o \
   CMakeFiles/kernel.elf.dir/kernel/Shell.c.o \
   CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o \
+  CMakeFiles/kernel.elf.dir/drivers/vga13.c.o \
   CMakeFiles/kernel.elf.dir/fs/easyfs.c.o \
   CMakeFiles/kernel.elf.dir/fs/ed.c.o
 
@@ -37,6 +38,8 @@ CMakeFiles/kernel.elf.dir/kernel/string.c.o:
 CMakeFiles/kernel.elf.dir/kernel/Shell.c.o:
 
 CMakeFiles/kernel.elf.dir/drivers/kbd_driver.c.o:
+
+CMakeFiles/kernel.elf.dir/drivers/vga13.c.o:
 
 CMakeFiles/kernel.elf.dir/fs/easyfs.c.o:
 

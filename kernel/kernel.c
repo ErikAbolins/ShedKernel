@@ -12,7 +12,79 @@
 #include "Shell.h"
 #include "easyfs.h"
 #include "ed.h"
+#include "vga13.h"
 
+
+/* Forward-declare port I/O so serial helpers can use them */
+extern char read_port(unsigned short port);
+extern void write_port(unsigned short port, unsigned char data);
+
+/* =========================================================
+ * Serial debug (COM1) — works regardless of display mode
+ * ========================================================= */
+
+static void serial_write(char c)
+{
+    while (!(read_port(0x3F8 + 5) & 0x20));
+    write_port(0x3F8, (unsigned char)c);
+}
+
+static void serial_print(const char *s)
+{
+    while (*s) {
+        if (*s == '\n') serial_write('\r');
+        serial_write(*s++);
+    }
+}
+
+static void serial_hex(unsigned int val)
+{
+    const char *hex = "0123456789ABCDEF";
+    serial_print("0x");
+    for (int i = 28; i >= 0; i -= 4)
+        serial_write(hex[(val >> i) & 0xF]);
+}
+
+/* =========================================================
+ * Multiboot info struct (partial — only fields we need)
+ * ========================================================= */
+
+typedef struct {
+    u32 flags;
+    u32 mem_lower;
+    u32 mem_upper;
+    u32 boot_device;
+    u32 cmdline;
+    u32 mods_count;
+    u32 mods_addr;
+    u32 syms[4];
+    u32 mmap_length;
+    u32 mmap_addr;
+    u32 drives_length;
+    u32 drives_addr;
+    u32 config_table;
+    u32 boot_loader_name;
+    u32 apm_table;
+    u32 vbe_control_info;
+    u32 vbe_mode_info;
+    u16 vbe_mode;
+    u16 vbe_interface_seg;
+    u16 vbe_interface_off;
+    u16 vbe_interface_len;
+    u64 framebuffer_addr;   /* physical address of framebuffer */
+    u32 framebuffer_pitch;  /* bytes per row */
+    u32 framebuffer_width;
+    u32 framebuffer_height;
+    u8  framebuffer_bpp;
+    u8  framebuffer_type;
+} __attribute__((packed)) multiboot_info_t;
+
+/* Framebuffer info — filled in by kernel_main, used by vga13 driver */
+uint32_t fb_phys_addr  = 0;
+uint32_t fb_pitch      = 0;
+uint32_t fb_width      = 0;
+uint32_t fb_height     = 0;
+uint8_t  fb_bpp        = 0;
 
 /* =========================================================
  * Constants
@@ -46,8 +118,7 @@ typedef unsigned int   u32;
  * Externals
  * ========================================================= */
 
-extern char  read_port(unsigned short port);
-extern void  write_port(unsigned short port, unsigned char data);
+/* read_port / write_port already declared above */
 extern void  load_idt(unsigned long *idt_ptr);
 extern void  kbd_handler(void);
 extern void  timer_handler(void);
@@ -229,7 +300,7 @@ void gdt_init(void)
 
     asm volatile("lgdt %0" : : "m"(kgdtr));
 
-    /* Load segment registers (written here instead of the bootloader because life is short) */
+    /* Load segment registers */
     asm volatile(
         "movw $0x10, %ax\n"
         "movw %ax, %ds\n"
@@ -272,24 +343,15 @@ void idt_init(void)
     IDT[0x80].type_attr         = 0xEF;
     IDT[0x80].offset_higherbits = ((u32)syscall_handler >> 16);
 
-    /* PIC initialisation (8259A)
-     * ICW1 - begin init */
+    /* PIC initialisation (8259A) */
     write_port(0x20, 0x11);
     write_port(0xA0, 0x11);
-
-    /* ICW2 - vector offsets */
     write_port(0x21, 0x20);
     write_port(0xA1, 0x28);
-
-    /* ICW3 - cascading */
     write_port(0x21, 0x04);
     write_port(0xA1, 0x02);
-
-    /* ICW4 - environment info */
     write_port(0x21, 0x01);
     write_port(0xA1, 0x01);
-
-    /* Mask all except keyboard (IRQ1) and timer (IRQ0) */
     write_port(0x21, 0xFC);
     write_port(0xA1, 0xFE);
 
@@ -334,16 +396,16 @@ void jump_to_userspace(void)
 {
     asm volatile("mov %%esp, %0" : "=r"(kernel_esp_save));
     asm volatile(
-        "mov $0x2B, %%ax\n"     /* user data segment   */
+        "mov $0x2B, %%ax\n"
         "mov %%ax, %%ds\n"
         "mov %%ax, %%es\n"
         "mov %%ax, %%fs\n"
         "mov %%ax, %%gs\n"
-        "push $0x33\n"          /* SS  = user stack    */
-        "push $0xB0000FF0\n"    /* ESP                 */
-        "pushf\n"               /* EFLAGS              */
-        "push $0x23\n"          /* CS  = user code     */
-        "push $0xA0000020\n"    /* EIP                 */
+        "push $0x33\n"
+        "push $0xB0000FF0\n"
+        "pushf\n"
+        "push $0x23\n"
+        "push $0xA0000020\n"
         "iret\n"
         : : : "eax"
     );
@@ -406,7 +468,6 @@ u32 syscall_dispatch(u32 syscall_num, u32 arg1, u32 arg2, u32 arg3)
         case 8:  return (u32)fs_read_file((char*)arg1, (char*)arg2, (u32)arg3);
         case 9:  return (u32)fs_write_file((char*)arg1, (char*)arg2, (u32)arg3);
         case 10:
-            /* Backspace: erase the last character from the VGA buffer */
             if (current_loc >= 2) {
                 current_loc -= 2;
                 vidptr[current_loc]     = ' ';
@@ -415,10 +476,6 @@ u32 syscall_dispatch(u32 syscall_num, u32 arg1, u32 arg2, u32 arg3)
             return 0;
         case 11: clear_screen();                                  return 0;
         case 12: {
-            /*
-             * _sbrk: bump a per-process heap pointer, mapping new
-             * physical pages as the pointer crosses page boundaries.
-             */
             static u32 user_heap_ptr = 0xE0000000;
             u32 old     = user_heap_ptr;
             u32 new_ptr = old + arg1;
@@ -442,9 +499,6 @@ u32 syscall_dispatch(u32 syscall_num, u32 arg1, u32 arg2, u32 arg3)
  * kernel_main
  * ========================================================= */
 
-/*
- * Helper: copy a flat binary blob into a pre-mapped virtual address.
- */
 static void copy_binary(u8 *dst, char *start, char *end)
 {
     int i = 0;
@@ -452,58 +506,131 @@ static void copy_binary(u8 *dst, char *start, char *end)
         dst[i++] = *start++;
 }
 
-/*
- * Helper: zero a region of memory (poor man's memset before mm is up).
- */
 static void zero_region(u8 *ptr, int bytes)
 {
     for (int i = 0; i < bytes; i++)
         ptr[i] = 0;
 }
 
-void kernel_main(void)
+
+void kernel_main(uint32_t mb_magic, uint32_t mb_addr)
 {
+    serial_print("[1] kernel_main entered\n");
+
+    /* Parse framebuffer info before anything else */
+    multiboot_info_t *mb = (multiboot_info_t*)mb_addr;
+    serial_print("[2] mb ptr set\n");
+
+    if (mb && (mb->flags & (1 << 12))) {
+        fb_phys_addr = (uint32_t)mb->framebuffer_addr;
+        fb_pitch     = mb->framebuffer_pitch;
+        fb_width     = mb->framebuffer_width;
+        fb_height    = mb->framebuffer_height;
+        fb_bpp       = mb->framebuffer_bpp;
+        serial_print("[3] fb fields parsed\n");
+    } else {
+        serial_print("[3] no fb in multiboot (bit 12 not set)\n");
+    }
+
+    serial_print("[3] flags="); serial_hex(mb ? mb->flags : 0);
+    serial_print(" fb_addr="); serial_hex(fb_phys_addr);
+    serial_print(" w="); serial_hex(fb_width);
+    serial_print(" h="); serial_hex(fb_height);
+    serial_print(" pitch="); serial_hex(fb_pitch);
+    serial_print(" bpp="); serial_hex(fb_bpp);
+    serial_print("\n");
+
     clear_screen();
+    serial_print("[4] clear_screen done\n");
+
     gdt_init();
+    serial_print("[5] gdt_init done\n");
+
     paging_alloc_init();
+    serial_print("[6] paging_alloc_init done\n");
+
     init_paging();
+    serial_print("[7] init_paging done\n");
+
+    /* --- Init VGA 13H --- */
+    if (fb_phys_addr) {
+        serial_print("[8] mapping framebuffer...\n");
+        uint32_t fb_size = fb_pitch * fb_height;
+        serial_print("    fb_size="); serial_hex(fb_size); serial_print("\n");
+        for (uint32_t off = 0; off < fb_size; off += 0x1000) {
+            uint32_t addr    = fb_phys_addr + off;
+            uint32_t dir_idx = addr >> 22;
+            uint32_t tbl_idx = (addr >> 12) & 0x3FF;
+
+            if (!(page_directory[dir_idx] & 1)) {
+                u32 new_tbl = alloc_page_frame();
+                u32 *t = (u32*)new_tbl;
+                for (int i = 0; i < 1024; i++) t[i] = 0;
+                page_directory[dir_idx] = new_tbl | 3;
+            }
+            u32 *tbl = (u32*)(page_directory[dir_idx] & ~0xFFF);
+            tbl[tbl_idx] = addr | 3;
+        }
+        asm volatile("mov %%cr3, %%eax; mov %%eax, %%cr3" ::: "eax");
+        serial_print("[9] fb mapped, calling vga13_init\n");
+        vga13_init(fb_phys_addr, fb_pitch, fb_width, fb_height);
+        serial_print("[10] vga13_init done\n");
+    } else {
+        serial_print("[8] fb_phys_addr=0, skipping fb map\n");
+    }
+
+    serial_print("[11] mapping user pages\n");
 
     /* --- User test binary @ 0xA0000000 --- */
-    map_user_page(0xA0000000, alloc_page_frame()); /* code  */
-    map_user_page(0xB0000000, alloc_page_frame()); /* stack */
+    map_user_page(0xA0000000, alloc_page_frame());
+    map_user_page(0xB0000000, alloc_page_frame());
     copy_binary((u8*)0xA0000000, _binary_user_flat_start, _binary_user_flat_end);
+    serial_print("[12] user binary mapped\n");
 
     /* --- Shared IPC page @ 0xF0000000 --- */
     map_user_page(0xF0000000, alloc_page_frame());
     zero_region((u8*)0xF0000000, 4096);
+    serial_print("[13] IPC page mapped\n");
 
-    /* --- Editor binary @ 0x70000000 (12 code pages + 1 stack page) --- */
+    /* --- Editor binary @ 0x70000000 --- */
     for (int p = 0; p < 12; p++)
         map_user_page(0x70000000 + p * 0x1000, alloc_page_frame());
     map_user_page(0x71000000, alloc_page_frame());
     zero_region((u8*)0x70000000, 12 * 4096);
     copy_binary((u8*)0x70000000, _binary_user_editor_flat_start, _binary_user_editor_flat_end);
+    serial_print("[14] editor mapped\n");
 
-    /* --- Shell binary @ 0xC0000000 (12 code pages + 1 stack page) --- */
+    /* --- Shell binary @ 0xC0000000 --- */
     for (int p = 0; p < 12; p++)
         map_user_page(0xC0000000 + p * 0x1000, alloc_page_frame());
     map_user_page(0xD0000000, alloc_page_frame());
-    zero_region((u8*)0xC0000000, 12 * 4096); /* also initialises BSS */
+    zero_region((u8*)0xC0000000, 12 * 4096);
     copy_binary((u8*)0xC0000000, _binary_user_shell_flat_start, _binary_user_shell_flat_end);
+    serial_print("[15] shell mapped\n");
 
     /* --- Hardware init --- */
     idt_init();
+    serial_print("[16] idt_init done\n");
     pit_init();
-    write_port(0x21, read_port(0x21) & ~0x01); /* unmask IRQ0 (timer) */
+    serial_print("[17] pit_init done\n");
+    write_port(0x21, read_port(0x21) & ~0x01);
     asm volatile("sti");
+    serial_print("[18] interrupts enabled\n");
     kbd_init();
     kbd_enable();
+    serial_print("[19] kbd init done\n");
 
     /* --- Software init --- */
     init_dynamic_mem();
+    serial_print("[20] heap init done\n");
     fs_init();
+    serial_print("[21] fs init done\n");
+    vga13_clear(0x00FF0000U);  /* bright red in 32bpp XRGB */
+    serial_print("[22] vga13_clear done\n");
+    vga13_put_pixel(10, 10, 0x00FFFFFFU);
+    serial_print("[23] vga13_put_pixel done\n");
     initShell();
     lsh_loop();
 
-    while (1); /* should never reach here */
+    while (1);
 }
